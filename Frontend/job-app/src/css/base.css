@@ -1,0 +1,274 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+
+:root {
+  --primary-color: #00E676;
+  --primary-color-light-1: #7deda1;
+  --primary-color-light-2: #b5f4c7;
+  --primary-color-dark: #00c32b;
+
+  --secondary-color: #26a1ff;
+  --secondary-color-light-1: #8ac8ff;
+  --secondary-color-light-2: #b9ddff;
+  --secondary-color-dark: #006fe6;
+
+  --light-blue-50: #E1F5FE;
+  --light-blue-100: #B3E5FC;
+  --dark-blue: #014b85;
+
+  --orange-color: #f27e42;
+  --orange-light-color: #f7be68;
+
+  --white: #fff;
+  --black: #000;
+}
+
+/* * RESET CSS */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	/* font: inherit; */
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* END */
+
+
+
+
+
+* {
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* * LOADING */
+/* .loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 142px;
+  height: 40px;
+  margin: -20px 0 0 -71px;
+  background: white;
+  filter: contrast(20);
+}
+.loading .dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 12px;
+    left: 15px;
+    filter: blur(4px);
+    background: #000;
+    border-radius: 50%;
+    transform: translateX(0);
+    animation: dot 2s infinite;
+}
+.loading .dot .dots {
+    transform: translateX(0);
+    margin-top: 12px;
+    margin-left: 31px;
+    animation: dots 2s infinite;
+}
+.loading .dot .dots span {
+      display: block;
+      float: left;
+      width: 16px;
+      height: 16px;
+      margin-left: 16px;
+      filter: blur(4px);
+      background: #000;
+      border-radius: 50%;
+}
+
+@keyframes dot {
+  50% {
+    transform: translateX(96px)
+  }
+}
+
+@keyframes dots {
+  50% {
+    transform: translateX(-31px)
+  }
+} */
+
+.loadingpage {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: white;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loading-bar-spinner.spinner {
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
+  position: absolute;
+  z-index: 19 !important;
+  animation: loading-bar-spinner 400ms linear infinite;
+}
+
+#loading-bar-spinner.spinner .spinner-icon {
+  width: 40px;
+  height: 40px;
+  border:  solid 4px transparent;
+  border-top-color:  #00C8B1 !important;
+  border-left-color: #00C8B1 !important;
+  border-radius: 50%;
+}
+
+@keyframes loading-bar-spinner {
+0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+.btn-delete-job {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete-job .icon-delete {
+  color: #aaaaaa;
+}
+
+/* MODAL */
+.modalwrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* display: flex;
+  animation: fadeIn linear 0.1s; */
+}
+
+.modal__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__body {
+  position: relative;
+  z-index: 100;
+  margin: auto;
+  border-radius: 5px;
+  --growth-form: 0.7;
+  --growth-to: 1;
+  animation: growth linear 0.1s;
+}
+.auth-form {
+  background-color: var(--white-color);
+  border-radius: 4px;
+  width: 500px;
+  /* overflow: hidden; */
+}
+
+.auth-form__container {
+  padding: 0 32px;
+}
+
+/* * CKEDITOR */
+.ck-editor__editable {
+  min-height: 300px !important;
+}
