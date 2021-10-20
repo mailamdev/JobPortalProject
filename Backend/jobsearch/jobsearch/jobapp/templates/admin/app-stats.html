@@ -1,0 +1,12 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+<h1>THỐNG KÊ THÔNG TIN TUYỂN DỤNG</h1>
+<h2>Số lượng công ty: {{ company_count }}</h2>
+
+<ul>
+{% for s in stats %}
+<li><strong>{{ s.name }}</strong> đang có {{s.post_count }} tin tuyển dụng. </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
