@@ -83,10 +83,10 @@ export default function Header() {
 
 
     let navbarMenu = <>
-        <NavLink to='/login' className='nav-links btn btn-primary btn-md' onClick={closeMobileMenu}>
+        <NavLink to='/login' className='nav-links btn btn-info btn-md' onClick={closeMobileMenu}>
             Đăng nhập
         </NavLink>
-        <NavLink to='/register' className='nav-links btn btn-outline-light btn-md' onClick={closeMobileMenu}>
+        <NavLink to='/register' className='nav-links btn btn-outline-success btn-md' onClick={closeMobileMenu}>
             Đăng ký
         </NavLink>
         

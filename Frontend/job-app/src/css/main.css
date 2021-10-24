@@ -12,12 +12,18 @@
 
 /* * HEADER */
 .navbar {
-    background: var(--secondary-color);
+    /* background: var(--secondary-color); */
+    background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
     height: 80px;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    position: fixed !important;
+    top: 0;
+    z-index: 10;
+    width: 100%;
 }
 
 .navbar-container {
@@ -56,7 +62,10 @@
 
   
 .nav-links {
-    color: var(--white);
+    /* color: var(--white); */
+    color: #17a2b8;
+
+
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -174,7 +183,9 @@
 }
   
 #basic-nav-dropdown {
-  color: white;
+  /* color: white; */
+  color: #17a2b8;
+
 }
 
 /* @media screen and (max-width: 960px) {
@@ -267,31 +278,37 @@
 
   /* * BANNER */
 .slider {
-  background-color: var(--light-blue-50);
+  /* background-color: var(--light-blue-50); */
+  background: #4AC29A;
+  background: -webkit-linear-gradient(to right, #BDFFF3, #4AC29A);
+  background: linear-gradient(to right, #ebfffb, #fffff7);
   padding-bottom: 1px;
+  margin-top: 80px;
 }
 
 .banner {
   display: flex;
   align-items: center;
+  
 }
 
 .banner .main-heading {
   margin: 0;
   /* text-align: center; */
-  font-size: 46px;
+  font-size: 42px;
   font-weight: 700;
-  color: #26a1ff;
+  color: #23c7ac;
   text-transform: uppercase;
+  font-family: Montserrat;
 }
 
 .banner .sub-heading {
   margin-bottom: 0;
   margin-top: 12px;
   /* text-align: center; */
-  font-size: 28px;
-  font-weight: 500;
-  color: #26a1ff;
+  font-size: 26px;
+  font-weight: 600;
+  color: #27debf;
 }
 
 .banner-img {
@@ -653,6 +670,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 8px 24px;
   margin-top: 28px;
@@ -660,7 +678,7 @@
 }
 
 .company-item-logo {
-  /* width: 150px; */
+  width: 150px;
   height: auto;
   /* margin: 30px auto 20px; */
   line-height: 150px
@@ -750,8 +768,9 @@
 /* * FOOTER */
 footer {
   width:100%;
-  background: var(--light-blue-100);
+  background: rgb(239, 255, 253);
   padding: 30px 10px 10px;
+  box-shadow: 0 2px 2px 2px rgb(0 0 0 / 20%);
   /* margin-top: -18%; */
 }
 
@@ -782,6 +801,7 @@ footer {
   text-transform: uppercase;
   font-weight: 600;
   font-size:14px;
+  color: #17a2b8;
 }
 
 #copyright {
