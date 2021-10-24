@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Col, Row } from "react-bootstrap"
 import API, { endpoints } from "../Configs/API"
-import JobCart from './JobCart'
 import cookies from 'react-cookies'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

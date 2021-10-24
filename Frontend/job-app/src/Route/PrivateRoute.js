@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import API, { endpoints } from '../Configs/API';
 import cookies from 'react-cookies'
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -19,8 +18,11 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     //     }
     //     getUser()
     // }, [])
+    var isRecruiter = false
     const user = cookies.load('user')
-    const isRecruiter = user.is_recruiter
+    if (user !== undefined) {
+        isRecruiter = user.is_recruiter
+    }
     return (
 
         // Show the component only when the user is logged in

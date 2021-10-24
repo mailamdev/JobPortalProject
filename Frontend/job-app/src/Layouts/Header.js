@@ -21,6 +21,7 @@ export default function Header() {
     let user = auth
     if (cookies.load('user') != null) {
         user = cookies.load('user')
+        
     }
     // * Đăng xuất
     const logout = (event) => {
@@ -53,9 +54,35 @@ export default function Header() {
         getLevel()
     }, [])
 
+    let dropdownMenu = <>
+    <ul className='user-dropdown'>
+        <li>
+            <NavLink to='/profile' className="user-dropdown-link">Quản lý tài khoản</NavLink>
+        </li>
+        <li>
+            <div onClick={logout} className="user-dropdown-link">Đăng xuất</div>
+        </li>
+    </ul> 
+    </>
+   
+    if (user != null && user.is_recruiter === true) {
+        dropdownMenu =  <>
+        <ul className='user-dropdown'>
+            <li>
+                <NavLink to='/profile' className="user-dropdown-link">Quản lý tài khoản</NavLink>
+            </li>
+            <li>
+                <NavLink to='/recruitment' className="user-dropdown-link">Quản lý tuyển dụng</NavLink>
+            </li>
+            <li>
+                <div onClick={logout} className="user-dropdown-link">Đăng xuất</div>
+            </li>
+        </ul> 
+        </>
+    }
 
 
-    let r = <>
+    let navbarMenu = <>
         <NavLink to='/login' className='nav-links btn btn-primary btn-md' onClick={closeMobileMenu}>
             Đăng nhập
         </NavLink>
@@ -65,24 +92,20 @@ export default function Header() {
         
     </>
     
+    
     if (user != null) {
-        r = <> 
+        navbarMenu = <> 
         <div className='user'>
         <FontAwesomeIcon icon={faUserCircle}  className="icon"></FontAwesomeIcon>
         <span className='user-name'>{user.last_name} {user.first_name}</span>
         <FontAwesomeIcon icon={faSortDown}  className="icon icon-dropdown"></FontAwesomeIcon>
-        <ul className='user-dropdown'>
-            <li>
-                <NavLink to='/profile' className="user-dropdown-link">Quản lý tài khoản</NavLink>
-            </li>
-            <li>
-                <div onClick={logout} className="user-dropdown-link">Đăng xuất</div>
-            </li>
-        </ul> 
+        {dropdownMenu}
         
         </div>
         </>
     } 
+
+    
 
     return (
         <>
@@ -123,7 +146,7 @@ export default function Header() {
                         </div>
                         <div className="navbar-list-right">
                             
-                            {r}
+                            {navbarMenu}
                             
                         </div>
                     </div>

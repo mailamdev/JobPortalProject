@@ -45,7 +45,7 @@ export default function CompanyList() {
         </Pagination> */}
         <Row>
             <div className="company-wrap">
-                {companies.map(company =><CompanyCard company={company}/>)}
+                {companies.map(company =><CompanyCard company={company} key={company.id}/>)}
             </div>
         </Row>
         </Container>

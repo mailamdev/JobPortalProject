@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Col, Row } from "react-bootstrap"
 import API, { endpoints } from "../Configs/API"
-import JobCart from './JobCart'
 import cookies from 'react-cookies'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +9,6 @@ import Loading from "./Loading"
 
 export default function SavedJobs() {
     let [jobs, setJobs] = useState([])
-    let [jobId, setJobId] = useState([])
     let [user, setUser] = useState(null) 
     let [ isLoading, setLoading ] = useState(true)
 

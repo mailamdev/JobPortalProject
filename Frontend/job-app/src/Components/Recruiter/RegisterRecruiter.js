@@ -8,8 +8,8 @@ import {
     Button,
   } from 'react-bootstrap';
 
-import API, { endpoints } from '../Configs/API';
-import { Redirect, useHistory } from 'react-router';
+import API, { endpoints } from '../../Configs/API';
+import { useHistory } from 'react-router';
 
 export default function RegisterRecruiter(props) {
     const [email, setEmail] = useState('')
@@ -20,7 +20,7 @@ export default function RegisterRecruiter(props) {
     const recruiter = 1
     const [password, setPassword] = useState('')
     const [comfirmpw, setComfirmpw] = useState('')
-    const [isLogged, setLogged] = useState(false)
+    // const [isLogged, setLogged] = useState(false)
     const history = useHistory();
 
     const register = async (event) => {
@@ -81,7 +81,7 @@ export default function RegisterRecruiter(props) {
             }
       })
       cookies.save('user', user.data)
-      setLogged(true);
+    //   setLogged(true);
       history.push('add-company')
 
   }

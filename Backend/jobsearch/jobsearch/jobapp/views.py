@@ -45,13 +45,13 @@ class UserViewSet(viewsets.ViewSet,
     def get_object(self):
         return self.request.user
 
-    
-    
     @action(methods=['get'], detail=True, url_path="saved-jobs")
     def get_saved_jobs(self, request, pk):
         jobs = self.get_object().saved_jobs.all()
         
         return Response(SavedPostSerializer(jobs, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
+
+
         
 class AuthInfo(APIView):
     def get(self, request):
@@ -210,7 +210,12 @@ class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAP
         
         return Response(PostSerializer(posts, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
 
-    
+    @action(methods=['get'], detail=True, url_path="recruiter-company")
+    def get_company(self, request, pk):
+        user = self.request.user
+        company = Company.objects.get(user=user)
+
+        return Response(CompanyDetailSerializer(company, context={'request': request}).data, status=status.HTTP_200_OK)
 
     
 

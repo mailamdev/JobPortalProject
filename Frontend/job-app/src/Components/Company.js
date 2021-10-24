@@ -29,7 +29,6 @@ export default function Company() {
         getCompany()
         
     },[companyId])
-    console.log(isLoading)
 
     return (
         <>

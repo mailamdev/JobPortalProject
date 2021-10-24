@@ -29,7 +29,7 @@ export default function Jobs() {
     let items = []
     for (let i = 0; i < Math.ceil(count/6); i++) {
         items.push (
-            <Pagination.Item><Link to={"/?page=" + (i + 1)}>{i + 1}</Link></Pagination.Item>
+            <Pagination.Item><Link to={"/?page=" + (i + 1)} >{i + 1}</Link></Pagination.Item>
         )
     }
 
@@ -45,7 +45,7 @@ export default function Jobs() {
         <div className="jobs-wrap">
          
             <Row>
-                {posts.map(post =><JobCart post={post}/>)}
+                {posts.map(post =><JobCart post={post} key={post.id}/>)}
             </Row>
         
         </div>

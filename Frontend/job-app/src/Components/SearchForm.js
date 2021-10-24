@@ -55,7 +55,7 @@ export default function SearchForm() {
                 <option value="">Tất cả cấp bậc</option>)
                 {levels.map(level => {
                     let path = `&level_id=${level.id}`
-                    return <option value={path}>{level.name}</option>})}
+                    return <option value={path} key={level.id}>{level.name}</option>})}
                 </select>
                 </div>
             </div>
@@ -67,7 +67,7 @@ export default function SearchForm() {
 
                 {locations.map(l => {
                     let path = `&location_id=${l.id}`
-                    return <option value={path}>{l.name}</option>})}
+                    return <option value={path} key={l.id}>{l.name}</option>})}
                 </select>
                 </div>
             </div>

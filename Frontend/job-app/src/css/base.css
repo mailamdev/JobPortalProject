@@ -213,6 +213,16 @@ table {
 100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 
+
+/* *BUTTON */
+.button-group {
+  float: right;
+}
+
+.button-group .button-item {
+  margin-right: 20px;
+}
+
 .btn-delete-job {
   width: 24px;
   height: 24px;

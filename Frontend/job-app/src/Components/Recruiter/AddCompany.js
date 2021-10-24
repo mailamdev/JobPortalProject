@@ -2,7 +2,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import API, { endpoints } from '../Configs/API';
+import API, { endpoints } from '../../Configs/API';
 import cookies from 'react-cookies'
 
 
@@ -13,7 +13,6 @@ export default function AddCompany() {
     const image = useRef()
     const [address, setAddress] = useState('')
     const [website, setWebsite] = useState('')
-    const posts = [0]
 
     const handleChange = (e, editor) => {
         setDescription(editor.getData())
@@ -43,7 +42,6 @@ export default function AddCompany() {
             formData.append("description", description)
             formData.append("address", address)
             formData.append("website", website)
-            formData.append("posts", posts)
             formData.append("user", userId)
 
                 console.log(formData)

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBookmark, faClipboard} from '@fortawesome/free-solid-svg-icons';
 import { Button, Form } from 'react-bootstrap';
+import Loading from './Loading';
 
 
 export default function Profile() {
@@ -212,16 +213,7 @@ export default function Profile() {
         
         
          
-        ): (<div style={{height: '100vh'}}>
-            <div className="loading">
-            <span className="dot"></span>
-            <div className="dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            </div>
-        </div>)}
+        ): (<Loading/>)}
         </>
     )
 }

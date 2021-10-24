@@ -36,7 +36,7 @@ class UserSerializer(ModelSerializer):
         instance.email = validated_data['email']
         instance.phone_number = validated_data['phone_number']
 
-        instance.save()
+        instance.save() 
 
         return super().update(instance, validated_data)
 

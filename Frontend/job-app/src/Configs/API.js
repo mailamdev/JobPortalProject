@@ -1,18 +1,15 @@
 import axios  from 'axios';
 
 export let endpoints = {
-    'categories': '/categories/',
     'posts': '/posts/',
-    // 'post-detail': (postId) => `/posts/${postId}/`,
     'users': '/users/',
     'oauth2-info': '/oauth2-info/',
-
     'update-info': (userId) => `/users/${userId}/`,
     'current-user': '/users/current-user/',
     'login': '/o/token/',
     'companies': '/companies/',
     'add-companies': '/add-companies/',
-
+    'recruiter-company': (userId) => `/companies/${userId}/recruiter-company/`,
     'company-jobs': (companyId) => `/companies/${companyId}/posts/`,
     'employees': '/employees/',
     'skillstag': '/skillstag/',
@@ -26,7 +23,6 @@ export let endpoints = {
 
     'delete-saved-jobs': (jobId) => `/save-job/${jobId}`
 
-    // 'saved-jobs': (userId) => `/users/${userId}/saved-jobs`
 }
 
 

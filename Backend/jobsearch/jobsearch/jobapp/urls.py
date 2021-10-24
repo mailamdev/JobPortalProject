@@ -10,7 +10,7 @@ router.register('posts',views.PostViewSet, basename='post')
 # router.register(r'posts/<pk>',views.PostDetailViewSet, basename='post-detail')
 router.register('companies',views.CompanyViewSet, basename='company')
 router.register('add-companies',views.AddCompanyViewSet, basename='add-company')
-
+# router.register('recruiter-company',views.CompanyViewSet, basename='recruiter-company')
 router.register('users',views.UserViewSet, basename='user')
 router.register('save-job',views.SavedPostViewSet, basename='save-job')
 router.register('apply-job',views.AppliedJobViewSet, basename='apply-job')
