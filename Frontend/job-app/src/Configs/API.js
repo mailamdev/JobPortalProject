@@ -11,10 +11,12 @@ export let endpoints = {
     'add-companies': '/add-companies/',
     'recruiter-company': (userId) => `/companies/${userId}/recruiter-company/`,
     'company-jobs': (companyId) => `/companies/${companyId}/posts/`,
-    'employees': '/employees/',
+    'applicants': (postId) => `/posts/${postId}/applicants/`,
+    // 'employees': '/employees/',
     'skillstag': '/skillstag/',
     'locations': '/locations/',
     'levels': '/levels/', 
+    'jobtype': '/jobtype/', 
     'save-job': (postId) => `/posts/${postId}/save-job/`,
     'apply-job': (postId) => `/posts/${postId}/apply-job/`,
 

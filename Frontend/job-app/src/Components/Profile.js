@@ -86,7 +86,7 @@ export default function Profile() {
     return(
         <>
         {user ? (
-        <div className="container bootstrap snippets bootdey">
+        <div className="container bootstrap snippets bootdey main">
         <div className="row">
           <div className="profile-nav col-md-3">
               <div className="panel">

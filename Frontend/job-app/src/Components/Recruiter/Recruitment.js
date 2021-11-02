@@ -1,4 +1,4 @@
-import {faClipboard, faBriefcase } from '@fortawesome/free-solid-svg-icons'
+import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
@@ -41,7 +41,7 @@ export default function Recruitment() {
         
         <>
         {company ? (
-        <div className="container-fluid bootstrap snippets bootdey">
+        <div className="container-fluid bootstrap snippets bootdey main">
         <div className="row">
           <div className="profile-nav col-md-2">
               <div className="panel">
@@ -55,6 +55,9 @@ export default function Recruitment() {
                       <li><Link to="/recruitment-jobs"> 
                       <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
                         Danh sách tuyển dụng</Link></li>
+                        <li><Link to="/add-post"> 
+                      <FontAwesomeIcon icon={faEdit} className="icon"></FontAwesomeIcon>
+                        Đăng tuyển</Link></li>
                   </ul>
               </div>
           </div>

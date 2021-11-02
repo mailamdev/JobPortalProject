@@ -65,6 +65,7 @@ class Register extends React.Component {
         return (
             <>
            <Container>
+            <div className="main">
             <Row className="justify-content-md-center" lg={2}>
                 <Col md="6">
                     <h1 className="section-tittle text-uppercase text-center">Đăng ký người dùng</h1>
@@ -150,7 +151,7 @@ class Register extends React.Component {
                         {/* <Col style={{ paddingLeft: 0, paddingRight: 0 }} className="d-flex justify-content-between" > */}
                         {/* <span>Đã có tài khoản? <a href="/login">Đăng nhập</a></span> */}
                         <span>Bạn là nhà tuyển dụng? <a href="/register-recruiter">Đăng ký tuyển dụng</a></span>
-                        <Button type="submit" className="btn btn-primary btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Đăng ký</Button>
+                        <Button type="submit" className="btn btn-info btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Đăng ký</Button>
                         {/* </Col> */}
                     </Form>
                 </Col>
@@ -162,6 +163,7 @@ class Register extends React.Component {
                     
                     </Col>
                 </Row>
+            </div>
             </Container>
             </>
         )

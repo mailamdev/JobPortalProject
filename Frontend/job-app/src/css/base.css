@@ -23,6 +23,9 @@
 
   --white: #fff;
   --black: #000;
+
+  --header-height: 80px;
+
 }
 
 /* * RESET CSS */
@@ -281,4 +284,9 @@ table {
 /* * CKEDITOR */
 .ck-editor__editable {
   min-height: 300px !important;
+}
+
+/* MAIN */
+.main {
+  margin-top: calc(var(--header-height) + 32px);
 }

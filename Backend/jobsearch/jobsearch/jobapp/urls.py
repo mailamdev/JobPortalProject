@@ -7,19 +7,16 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('posts',views.PostViewSet, basename='post')
-# router.register(r'posts/<pk>',views.PostDetailViewSet, basename='post-detail')
 router.register('companies',views.CompanyViewSet, basename='company')
 router.register('add-companies',views.AddCompanyViewSet, basename='add-company')
-# router.register('recruiter-company',views.CompanyViewSet, basename='recruiter-company')
 router.register('users',views.UserViewSet, basename='user')
 router.register('save-job',views.SavedPostViewSet, basename='save-job')
 router.register('apply-job',views.AppliedJobViewSet, basename='apply-job')
-# router.register('categories',views.CategoryViewSet, basename='category')
-# router.register('employees',views.EmployeeViewSet, basename='employee')
-# router.register('posts/<pk>/save/', views.SavedPostViewSet, basename='save-job'),
 router.register('skillstag',views.SkillTagViewSet, basename='skillstag')
 router.register('locations',views.LocationViewSet, basename='locations')
 router.register('levels',views.LevelViewSet, basename='levels')
+router.register('jobtype',views.JobTypeViewSet, basename='jobtype')
+
 
 
 

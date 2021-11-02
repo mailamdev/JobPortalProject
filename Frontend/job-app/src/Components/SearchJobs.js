@@ -33,6 +33,7 @@ export default function SearchJobs() {
         <>
         {isLoading ?  (<Loading/>) : (
         <Container>
+        <div className="main">
         {/* <Row>
             {posts.map(post =><JobCart post={post}/>)}
         </Row> */}
@@ -43,6 +44,7 @@ export default function SearchJobs() {
                 Chưa có việc làm phù hợp
             </Alert>
         )}
+        </div>
         </Container> )}
         </>
     )

@@ -92,6 +92,7 @@ export default function RegisterRecruiter(props) {
     return(
         <>
         <Container>
+            <div className="main">
             <Row className="justify-content-md-center" lg={2}>
                 <Col md="6">
                     <h1 className="section-tittle text-uppercase text-center">Đăng ký tuyển dụng</h1>
@@ -159,11 +160,12 @@ export default function RegisterRecruiter(props) {
             </Row>
                     
                     
-            <Row lg={2} className='d-flex justify-content-center'>
+            {/* <Row lg={2} className='d-flex justify-content-center'>
                 <Col>
                 
                 </Col>
-            </Row>
+            </Row> */}
+            </div>
         </Container>
         </>
     )

@@ -6,15 +6,15 @@ from django.http import HttpResponse, Http404
 from django.views import View
 from django.conf import settings
 from django.db.models import Q
-from rest_framework import serializers, viewsets, permissions, status, generics
+from rest_framework import serializers, viewsets, permissions, status, generics, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 
-from .models import Applied_Job, Level, Post, Company, SavedJobs, User, SkillTag
-from .serializers import ( AppliedJobSerializer, CompanyDetailSerializer, LevelSerializer, LocationSerializer, PostSerializer, 
+from .models import Applied_Job, JobType, Level, Post, Company, SavedJobs, User, SkillTag
+from .serializers import ( AppliedJobSerializer, CompanyDetailSerializer, JobTypeSerializer, LevelSerializer, LocationSerializer, PostSerializer, 
                         PostDetailSerializer,
                         CompanySerializer, 
                         SkillTagSerializer, 
@@ -145,6 +145,10 @@ class PostViewSet(viewsets.ViewSet,
 
         return posts
 
+    @action(methods=['get'], detail=True, url_path='applicants')
+    def get_applicants(self, request, pk):
+        applicants = self.get_object().applicant.all()
+        return Response(SavedPostSerializer(applicants, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
 
     # * Lưu bài đăng
     @action(methods=['post'], detail=True, url_path='save-job')
@@ -237,7 +241,6 @@ class SavedPostViewSet(viewsets.ViewSet,
         posts = SavedJobs.objects.filter(user=user)
 
         return posts
-        # return Response(SavedPostSerializer(posts, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         if request.user == self.get_object().user:
@@ -249,7 +252,6 @@ class AppliedJobViewSet(viewsets.ViewSet,
                         generics.ListAPIView, 
                         generics.RetrieveAPIView
                         ):
-    # queryset = SavedJobs.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = AppliedJobSerializer
     def get_queryset(self):
@@ -261,14 +263,27 @@ class AppliedJobViewSet(viewsets.ViewSet,
 class SkillTagViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = SkillTag.objects.all()
     serializer_class = SkillTagSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['id']
 
 class LocationViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['id']
 
 class LevelViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Level.objects.all()
     serializer_class = LevelSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['id']
+    
+
+class JobTypeViewSet(viewsets.ViewSet, generics.ListAPIView):
+    queryset = JobType.objects.all()
+    serializer_class = JobTypeSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['id']
     
 
 def logout_view(request):

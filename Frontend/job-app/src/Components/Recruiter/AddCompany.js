@@ -66,7 +66,7 @@ export default function AddCompany() {
     return (
         <>
         <Container>
-        <div className="card-body">
+        <div className="card-body main">
             <div className="form-group row form-row field-name">
                 <label htmlFor="name" className="col-sm-2 col-form-label">
                     <span>Tên công ty:</span>

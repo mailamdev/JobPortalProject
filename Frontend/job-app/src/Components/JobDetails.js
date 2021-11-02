@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react"
-import { faClock, faDollarSign, faMapMarkerAlt, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faDollarSign, faMapMarkerAlt, faBriefcase, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import {Link, useParams} from 'react-router-dom'
@@ -8,6 +8,7 @@ import { Button, Container, Row } from "react-bootstrap";
 import Loading from "./Loading";
 import cookies from 'react-cookies'
 import ApplyJob from "./ApplyJob";
+import Moment from 'react-moment';
 
 
 
@@ -90,6 +91,7 @@ export default function JobDetails() {
         <>
         {post ? (
         <Container>
+            <div className="main">
             {showForm ? (   
                 <>
                 <Button variant="outline-secondary" onClick={() => setShowForm(false)}>Quay lại</Button>
@@ -112,6 +114,9 @@ export default function JobDetails() {
                         </h5>
                         <Link to={`/company/${post.company.id}/posts/`} className="company-name">{post.company.name}</Link>
 
+
+
+
                         <div className="job-detail__info-list">
                             <div className="job-detail__info-item">
                                 <FontAwesomeIcon icon={faDollarSign} className="icon"></FontAwesomeIcon>
@@ -130,8 +135,14 @@ export default function JobDetails() {
                                 <span className="info-text">{post.level.name}</span>
                             </div>
                         </div>
+                        
                     </div>
+                    
                     <div className="job-detail__btn">
+                    <div className="job-detail__info-item-time">
+                        <FontAwesomeIcon icon={faCalendarDay} className="icon"></FontAwesomeIcon>
+                        <Moment fromNow>{post.update_date}</Moment>
+                    </div>
                     <Button onClick={applied} className="job-detai__btn-item" variant="success">Ứng tuyển ngay</Button>
                     <Button onClick={saveJob} className="job-detai__btn-item" variant="outline-danger">Lưu tin</Button>
                     </div>
@@ -150,6 +161,7 @@ export default function JobDetails() {
                 </div>
             </Row>
             )}
+            </div>
         </Container>) : 
         (<Loading/>)}
         </>

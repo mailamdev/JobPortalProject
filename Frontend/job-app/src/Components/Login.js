@@ -68,6 +68,7 @@ export default function Login(props) {
         return (
             <>
             <Container>
+                <div className="main">
                 <Row className="justify-content-md-center ">
                     <Col md="6">
                         <h1 className="py-4 section-tittle text-uppercase text-center">Đăng nhập</h1>
@@ -86,13 +87,14 @@ export default function Login(props) {
                         field={password} 
                         change={event => setPassword(event.target.value)}
                         />
-                        <Button type="submit" className="btn btn-primary btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Đăng nhập</Button>
+                        <Button type="submit" className="btn btn-info btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Đăng nhập</Button>
                         {/* <p className="forgot-password text-right">
                         Chưa có tài khoản? <a href="/register">Đăng Ký</a>
                         </p> */}
                     </Form>
                     </Col>
                 </Row>
+                </div>
             </Container>
             </>
         )

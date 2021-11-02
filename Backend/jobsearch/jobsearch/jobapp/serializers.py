@@ -104,7 +104,7 @@ class PostSerializer(ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ["id", "title", "created_date", "update_date", "job_type", "level", "salary", "location", "company", "skill_tags"]
+        fields = ["id", "title", "created_date", "update_date", "job_type", "level", "salary", "location", "company", "skill_tags", 'applicant']
 
 class PostDetailSerializer(PostSerializer):
     

@@ -32,8 +32,9 @@ export default function Company() {
 
     return (
         <>
+        <div className="main">
         {isLoading  ?  (<Loading/>)   : (<Container>
-            <div className="company-detail-container">
+            <div className="company-detail-container ">
                 <div className="company-detail">
                     <div className="company-detail__logo">
                         <img src={company.image} alt={company.name}/>
@@ -66,6 +67,7 @@ export default function Company() {
             </div>
         </Container>)
         }
+        </div>
         </>
         
     )

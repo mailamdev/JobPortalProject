@@ -57,7 +57,7 @@ export default function SavedJobs() {
     return (
         <>
         {isLoading ?  (<Loading/>) : (
-        <div className="container bootstrap snippets bootdey">
+        <div className="container bootstrap snippets bootdey main">
         <div className="row" style={{flexWrap: 'nowrap'}}>
           <div className="profile-nav col-md-3">
               <div className="panel">

@@ -12,6 +12,7 @@ import SavedJobs from './Components/SavedJobs';
 import AppliedJobs from './Components/AppliedJobs';
 import RegisterRecruiter from './Components/Recruiter/RegisterRecruiter';
 import AddCompany from './Components/Recruiter/AddCompany';
+import AddPost from './Components/Recruiter/AddPost';
 import PrivateRoute from './Route/PrivateRoute';
 import Recruitment from './Components/Recruiter/Recruitment';
 import RecruitmentJobs from './Components/Recruiter/RecruitmentJobs';
@@ -44,6 +45,7 @@ export default function App(props) {
               <PrivateRoute exact path="/add-company" component={AddCompany}/>
               <PrivateRoute exact path="/recruitment" component={Recruitment}/>
               <PrivateRoute exact path="/recruitment-jobs" component={RecruitmentJobs}/>
+              <PrivateRoute exact path="/add-post" component={AddPost}/>
 
 
 

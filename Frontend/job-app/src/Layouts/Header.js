@@ -122,6 +122,9 @@ export default function Header() {
                             <NavLink to='/' className='nav-links' onClick={closeMobileMenu}>
                                 Trang chủ
                             </NavLink>
+                            <NavLink to='/' className='nav-links' onClick={closeMobileMenu}>
+                                Giới thiệu
+                            </NavLink>
                             <NavDropdownMenu title="Tất cả việc làm" id="basic-nav-dropdown" className='nav-links'>
                             <DropdownSubmenu title="Việc làm theo kỹ năng" id="dropdown-skill">
                                 {skills.map((skill, i) => {
@@ -143,6 +146,7 @@ export default function Header() {
                                 })}
                             </DropdownSubmenu>
                             </NavDropdownMenu>
+                            
                         </div>
                         <div className="navbar-list-right">
                             
