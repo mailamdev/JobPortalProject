@@ -9,10 +9,11 @@ export let endpoints = {
     'login': '/o/token/',
     'companies': '/companies/',
     'add-companies': '/add-companies/',
+    'add-post': '/add-post/',
+
     'recruiter-company': (userId) => `/companies/${userId}/recruiter-company/`,
     'company-jobs': (companyId) => `/companies/${companyId}/posts/`,
     'applicants': (postId) => `/posts/${postId}/applicants/`,
-    // 'employees': '/employees/',
     'skillstag': '/skillstag/',
     'locations': '/locations/',
     'levels': '/levels/', 

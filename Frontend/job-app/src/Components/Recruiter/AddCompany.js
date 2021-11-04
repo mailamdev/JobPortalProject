@@ -5,7 +5,7 @@ import { Button, Container } from 'react-bootstrap';
 import API, { endpoints } from '../../Configs/API';
 import cookies from 'react-cookies'
 
-
+ 
 export default function AddCompany() {
     let [userId, setUserId] = useState(null) 
     const [name, setName] = useState('')
@@ -44,20 +44,19 @@ export default function AddCompany() {
             formData.append("website", website)
             formData.append("user", userId)
 
-                console.log(formData)
-                API.post(endpoints['add-companies'], formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${cookies.load("access_token")}`
-                    }
-                })
-                .then((res) => {
-                    alert('Đăng ký thành công.')
-                    // this.props.history.push("/login");
+            API.post(endpoints['add-companies'], formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${cookies.load("access_token")}`
+                }
+            })
+            .then((res) => {
+                alert('Đăng ký thành công.')
+                this.props.history.push("/login");
 
-                    
-                })
-                .catch(err => console.error(err))
+                
+            })
+            .catch(err => console.error(err))
             }
         
         event.preventDefault()
@@ -86,7 +85,6 @@ export default function AddCompany() {
                     editor={ClassicEditor}
                     onChange = {(e,editor) => {handleChange(e, editor)}}
                     />
-                    <div>{description}</div>
                 </div>
             </div>
             <div className="form-group row form-row field-name">

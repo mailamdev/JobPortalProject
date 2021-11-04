@@ -44,7 +44,7 @@ class UserSerializer(ModelSerializer):
 class SkillTagSerializer(ModelSerializer):
     class Meta:
         model = SkillTag
-        fields = "__all__"
+        fields = ["id", "name"]
 
 
 class LevelSerializer(ModelSerializer):
@@ -101,10 +101,12 @@ class PostSerializer(ModelSerializer):
     level = LevelSerializer()
     location = LocationSerializer()
     company = CompanySerializer()
+
+    # skill_tags_id = serializers.PrimaryKeyRelatedField(queryset=SkillTag.objects.all(), many=True)
     
     class Meta:
         model = Post
-        fields = ["id", "title", "created_date", "update_date", "job_type", "level", "salary", "location", "company", "skill_tags", 'applicant']
+        fields = ["id", "title", "created_date", "update_date", "job_type", "level", "salary", "location", "company", "skill_tags", "applicant"]
 
 class PostDetailSerializer(PostSerializer):
     
@@ -137,4 +139,4 @@ class AppliedJobSerializer(ModelSerializer):
 
     class Meta:
         model = Applied_Job
-        fields = ["id", "date_applied", "user", "post", "cv"]
+        fields = ["id", "date_applied", "user", "post", "cv", "summary"]

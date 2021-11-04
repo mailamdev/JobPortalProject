@@ -148,7 +148,7 @@ class PostViewSet(viewsets.ViewSet,
     @action(methods=['get'], detail=True, url_path='applicants')
     def get_applicants(self, request, pk):
         applicants = self.get_object().applicant.all()
-        return Response(SavedPostSerializer(applicants, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
+        return Response(AppliedJobSerializer(applicants, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
 
     # * Lưu bài đăng
     @action(methods=['post'], detail=True, url_path='save-job')
@@ -169,7 +169,38 @@ class PostViewSet(viewsets.ViewSet,
         job = Applied_Job.objects.create(user=user, post=post, cv=cv, summary=summary)
     
         return Response(AppliedJobSerializer(job, context={'request': request}).data, status=status.HTTP_200_OK)    
+
+class AddPostViewSet(viewsets.ViewSet, generics.CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostDetailSerializer
+    def get_serializer_context(self):
+        context = {'request': self.request}
+        return context  
+
    
+    def create(self, request,  *args, **kwargs):
+        creater = request.user
+        title = request.data['title']
+        content = request.data['content']
+        job_type = JobType.objects.get(id=request.data['jobtype'])
+        level = Level.objects.get(id=request.data['level'])
+        salary = request.data['salary']
+        location = Location.objects.get(id=request.data['location'])
+        company = Company.objects.get(id=request.data['company'])
+        # skill_tags = request.data['skilltag']
+
+        post = Post.objects.create(creater=creater, title=title, content=content, job_type=job_type, level=level, salary=salary, location=location, company=company, )
+        post.save()
+
+        skill_list = list(request.data['skilltag'].split(','))
+        # for skill in skill_list:
+        #     post.skill_tags.add(SkillTag.objects.get(pk=skill))
+
+        for index in range(len(skill_list)):
+            post.skill_tags.add(SkillTag.objects.get(pk=skill_list[index]))
+
+        return Response(PostSerializer(post, context={'request': self.request}).data, status=status.HTTP_200_OK)    
+
 class AddCompanyViewSet(viewsets.ViewSet, generics.CreateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
@@ -259,6 +290,16 @@ class AppliedJobViewSet(viewsets.ViewSet,
         posts = Applied_Job.objects.filter(user=user)
 
         return posts
+
+# class ApplicantViewSet(viewsets.ViewSet, 
+#                         generics.ListAPIView, 
+#                         generics.RetrieveAPIView
+#                         ):
+#     permission_classes = [permissions.IsAuthenticated]
+#     serializer_class = AppliedJobSerializer
+#     def get_queryset(self):
+#         post = self.get_object().posts.filter(active=True)
+#         return Applied_Job.objects.filter(company=company)
 
 class SkillTagViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = SkillTag.objects.all()

@@ -1,31 +1,33 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { useEffect, useRef, useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import API, { endpoints } from '../../Configs/API';
 import cookies from 'react-cookies'
 import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
-import Select from 'react-select'
+import Select, { OnChangeValue} from 'react-select'
 import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated()
 
 export default function AddCompany() {
-    let [userId, setUserId] = useState(null) 
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const image = useRef()
-    const [address, setAddress] = useState('')
-    const [website, setWebsite] = useState('')
+    const [title, setTitle] = useState('') 
+    const [content, setContent] = useState('')
+    const [jobtype, setJobtype] = useState('')
+    const [level, setLevel] = useState('')
+    const [salary, setSalary] = useState('')
+    const [location, setLocation] = useState('')
+    const [company, setCompany] = useState('')
+    const [skilltag, setSkilltag] = useState('')
+    const user = cookies.load('user')
 
-    const [skills, setSkills] = useState([])
+    // Load thông tin từ API
     const [locations, setLocations] = useState([])
+    const [skills, setSkills] = useState([])
     const [levels, setLevels] = useState([])
     const [types, setTypes] = useState([])
-
-    
     useEffect(() => {
         async function getSkill() {
             let res = await API.get(endpoints["skillstag"])
@@ -47,64 +49,64 @@ export default function AddCompany() {
             setTypes(res.data)
         }
         getType()
+        async function getCompanyId() {
+            let res = await API.get(endpoints['recruiter-company'](user.id), {
+                headers: {
+                  'Authorization':  `Bearer ${cookies.load('access_token')}`
+                }
+            })
+            setCompany(res.data.id)
+        }
+        getCompanyId()
     }, [])
-
-
 
     const skillOption = skills.map(skill => {
         return {value: skill.id, label: skill.name}
     })
 
+    const [options, setOptions] = useState([])
+    const skillselected = options.map(option => {
+        return option.value
+    })
+    
 
     const handleChange = (e, editor) => {
-        setDescription(editor.getData())
+        setContent(editor.getData())
     }
-    useEffect(() => {
-        async function getUser() {
-            let res = await API.get(endpoints['current-user'], {
-                headers: {
-                  'Authorization':  `Bearer ${cookies.load('access_token')}`
-                }
-            })
-            setUserId(res.data.id)
-        }
-        getUser()
-    }, [])
+
 
     
 
-    const addCompany = async (event) => {
-        if (name === "" ||  description === ""  || address === "" || image.current.files[0] === undefined ) {
+    const addPost = async (event) => {
+        // event.preventDefault()
+        console.log(location)
+
+        if (title === "" ||  content === ""  || jobtype === "" || level === "" || salary === "" || location === "" ){
             alert('Vui lòng nhập đủ thông tin!')
         } 
         else {
             const formData = new FormData()
-            formData.append("image", image.current.files[0])
-            formData.append("name", name)
-            formData.append("description", description)
-            formData.append("address", address)
-            formData.append("website", website)
-            formData.append("user", userId)
-
-                console.log(formData)
-                API.post(endpoints['add-companies'], formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${cookies.load("access_token")}`
-                    }
-                })
-                .then((res) => {
-                    alert('Đăng ký thành công.')
-                })
-                .catch(err => console.error(err))
-            }
-        
+            formData.append("title", title)
+            formData.append("content", content)
+            formData.append("jobtype", jobtype)
+            formData.append("level", level)
+            formData.append("salary", salary)
+            formData.append("location", location)
+            formData.append("company", company)
+            formData.append("skilltag", skillselected)
+            formData.append("create", user.id)
+            API.post(endpoints['add-post'], formData, {
+                headers: {
+                    "Authorization": `Bearer ${cookies.load("access_token")}`
+                }
+            }).then((res) => alert('Đăng tuyển thành công.'))
+            .catch(err => console.error(err))}
         event.preventDefault()
+
     }
 
     return (
         <>
-        {/* <Container> */}
         <div className="container-fluid bootstrap snippets bootdey main">
              <div className="row">
                <div className="profile-nav col-md-2">
@@ -113,9 +115,6 @@ export default function AddCompany() {
                            <li><Link to="/recruitment"> 
                             <FontAwesomeIcon icon={faBriefcase} className="icon"></FontAwesomeIcon>
                             Thông tin công ty</Link></li>
-                           {/* <li><Link to="#"> 
-                           <FontAwesomeIcon icon={faFileAlt} className="icon"></FontAwesomeIcon>
-                             Quản lý CV</Link></li> */}
                            <li ><Link to="/recruitment-jobs"> 
                            <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
                              Danh sách tuyển dụng</Link></li>
@@ -134,7 +133,7 @@ export default function AddCompany() {
                             </label>
                             <div className="col-sm-10">
                                 <input style={{width: "500px"}} type="text" 
-                                value={name} onChange={(event) => setName(event.target.value)}
+                                value={title} onChange={(event) => setTitle(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -147,28 +146,33 @@ export default function AddCompany() {
                                 editor={ClassicEditor}
                                 onChange = {(e,editor) => {handleChange(e, editor)}}
                                 />
-                                <div>{description}</div>
                             </div>
                         </div>
                         <div class="form-group row form-row">
                             
                         </div>
                         <div class="form-group row form-row">
-                            <label for="exampleFormControlSelect1" className="col-sm-2 col-form-label"
+                            <label htmlFor="jobtype" className="col-sm-2 col-form-label"
                             >Loại hình công việc</label>
-                            <select className="form-control col-sm-2" id="exampleFormControlSelect1">
+                            <select className="form-control col-sm-2" id="jobtype"
+                            onChange={(event) => setJobtype(event.target.value)}>
+                            <option value="">------</option>
                             {types.map(type => {
                             return <option value={type.id} key={type.id}>{type.name}</option>})}
                             </select> 
-                            <label for="exampleFormControlSelect1" className="col-form-label ml-5 mr-3"
+                            <label htmlFor="level" className="col-form-label ml-5 mr-3"
                             >Cấp bậc:</label>
-                            <select className="form-control col-sm-2" id="exampleFormControlSelect1">
+                            <select className="form-control col-sm-2" id="level"
+                            onChange={(event) => setLevel(event.target.value)}>
+                            <option value="">------</option>
                             {levels.map(level => {
                             return <option value={level.id} key={level.id}>{level.name}</option>})}
                             </select> 
-                            <label for="exampleFormControlSelect1" className="col-form-label ml-5 mr-3"
+                            <label htmlFor="location" className="col-form-label ml-5 mr-3"
                             >Địa điểm làm việc:</label>
-                            <select className="form-control col-sm-2" id="exampleFormControlSelect1">
+                            <select className="form-control col-sm-2" id="location"
+                            onChange={(event) => setLocation(event.target.value)}>
+                            <option value="">------</option>
                             {locations.map(location => {
                             return <option value={location.id} key={location.id}>{location.name}</option>})}
                             </select> 
@@ -182,7 +186,7 @@ export default function AddCompany() {
                             </label>
                             <div className="col-sm-10">
                                 <input style={{width: "500px"}} type="text" 
-                                value={name} onChange={(event) => setName(event.target.value)}
+                                value={salary} onChange={(event) => setSalary(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -199,17 +203,17 @@ export default function AddCompany() {
                             isMulti
                             options={skillOption}
                             
+                            onChange={(selectedOption) =>  setOptions(selectedOption)}
                             ></Select>
                         </div>
                         <div className="row button-group">
-                        <Button variant="danger" className="button-item" size="lg">Đăng tuyển</Button>   
+                        <Button onClick={addPost} variant="danger" className="button-item" size="lg">Đăng tuyển</Button>   
                         </div>
                         </div>
                     </div>
                  </div>
              </div>
-             </div>
-        {/* </Container> */}
+        </div>
         </>
     )
 }

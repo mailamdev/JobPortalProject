@@ -92,7 +92,7 @@ export default function Recruitment() {
                             <span>Ảnh đại diện công ty:</span>
                         </label>
                         <div className="col-sm-10">
-                        <img src={company.image} alt={company.name}/>
+                        <img src={company.image} alt={company.name}  className="recruitment-company-img"/>
                         <input type="file" ref={image} />  
                         </div>
                     </div>

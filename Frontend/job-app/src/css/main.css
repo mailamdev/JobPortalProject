@@ -1059,3 +1059,7 @@ footer {
   margin-top: 16px;
   color: #666666;
 }
+
+.recruitment-company-img {
+  max-width: 220px;
+}

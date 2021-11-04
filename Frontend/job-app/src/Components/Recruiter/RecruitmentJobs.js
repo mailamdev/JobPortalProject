@@ -100,7 +100,7 @@ function Post(props) {
         <div class="card" style={{width: '18rem'}}>
         <div class="card-header">
             <h5 className="jobs__tittle">
-                <Link to={`/posts/${props.post.id}/`}>{props.post.title}</Link>
+                <Link to={`/applicants/${props.post.id}/`}>{props.post.title}</Link>
             </h5>
         </div>
         <ul class="list-group list-group-flush">
