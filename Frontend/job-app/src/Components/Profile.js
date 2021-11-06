@@ -4,7 +4,7 @@ import cookies from 'react-cookies'
 import "../css/profile.css"
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBookmark, faClipboard} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBookmark, faClipboard, faPen} from '@fortawesome/free-solid-svg-icons';
 import { Button, Form } from 'react-bootstrap';
 import Loading from './Loading';
 
@@ -93,7 +93,7 @@ export default function Profile() {
                   <div className="user-heading round">
                       <Link to="#">
                           <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/8_avatar-512.png" alt=""/>
-                          
+                          <FontAwesomeIcon icon={faPen} className="icon"></FontAwesomeIcon>
                       </Link>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
@@ -172,28 +172,16 @@ export default function Profile() {
                                  />
                             </div>
                         </div>
-                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {/* <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="form-group">
                                 <label >Cập nhật ảnh đại diện:  </label>
-                                <input id="file" type="file" />
-
-                                {/* <input type="file"
-                                 className="form-control" 
-                                 id="phone" 
-                                 defaultValue={user.avatar}
-                                 value={avatar}
-                                 onChange={(event) => setLastName(event.target.value)}
-                                 /> */}
-                            </div>
-                        </div>
-                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div className="form-group">
-                                <label >Cập nhật CV: </label>
-                                
+                                <br/>
                                 <input id="file" type="file" />
                             </div>
                         </div> */}
-                        <Button type="submit" className="btn btn-primary mt-3">Lưu thông tin</Button>
+                        <div className="button-group">
+                            <Button type="submit" className="btn btn-primary mt-2">Lưu thông tin</Button>
+                        </div>
                     </div>
                     </Form>
 

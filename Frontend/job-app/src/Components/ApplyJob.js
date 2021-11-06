@@ -62,10 +62,10 @@ export default function ApplyJob() {
 
     return (
         <>
-            <span>Tải lên CV (yêu cầu định dạng pdf):  </span>
-            <input type="file" ref={cv} />  
+            <span className="mt-3">Tải lên CV (yêu cầu định dạng pdf):  </span>
+            <input type="file" accept=".pdf" ref={cv} />  
             <Form.Group controlId="summaryContent">
-                <Form.Label>Giới thiệu bản thân:</Form.Label>
+                <Form.Label className="mt-2">Giới thiệu bản thân:</Form.Label>
                 <Form.Control as="textarea" rows={8} value={summary} onChange={(event) => setSummary(event.target.value)}/>
             </Form.Group>
             {/* <div>Giới thiệu bản thân: </div>
@@ -87,7 +87,9 @@ export default function ApplyJob() {
             <Editable/>
             </Slate> 
             </div> */}
-            <Button onClick={applyJob} variant="danger">Gửi CV</Button>   
+            <div className="button-group">
+                <Button onClick={applyJob} variant="danger">Gửi CV</Button>   
+            </div>
         </>
     )
 

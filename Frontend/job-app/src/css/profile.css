@@ -16,6 +16,7 @@
     -webkit-border-radius: 50%;
     border: 10px solid rgba(255,255,255,0.3);
     display: inline-block;
+    position: relative;
 }
 
 .profile-nav .user-heading a img {
@@ -23,6 +24,23 @@
     height: 112px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
+}
+
+.profile-nav .user-heading a .icon {
+    position: absolute;
+    top: 18px;
+    right: 4px;
+    /* border: 1px solid; */
+    border-radius: 50%;
+    padding: 4px;
+    /* padding: 11px; */
+    height: 22px;
+    width: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #969696;
 }
 
 .profile-nav .user-heading h3 {

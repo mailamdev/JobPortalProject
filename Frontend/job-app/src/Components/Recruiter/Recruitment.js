@@ -41,7 +41,7 @@ export default function Recruitment() {
         
         <>
         {company ? (
-        <div className="container-fluid bootstrap snippets bootdey main">
+        <div className="container bootstrap snippets bootdey main">
         <div className="row">
           <div className="profile-nav col-md-2">
               <div className="panel">

@@ -68,9 +68,9 @@ class CompanyForm(forms.ModelForm):
         fields = '__all__'
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ["name", "address"]
-    search_fields = ["name", "address"]
-    list_filter = ["name"]
+    list_display = ["name", "address", "website", "user"]
+    search_fields = ["name", "address", "user__username"]
+    list_filter = ["name", "user"]
     readonly_fields = ["avatar"]
     # inlines = (PostInLine, )
     form = CompanyForm

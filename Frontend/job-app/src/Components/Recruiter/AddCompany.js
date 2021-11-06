@@ -115,7 +115,9 @@ export default function AddCompany() {
                     />
                 </div>
             </div>
-            <Button onClick={addCompany} variant="danger">Đăng ký</Button>   
+            <div className="row button-group">
+                <Button onClick={addCompany} variant="success" size="lg">Đăng ký</Button>   
+            </div>
 
         </div>
         </Container>

@@ -57,8 +57,7 @@ export default function RegisterRecruiter(props) {
     }
 
 
-    const login = async (event) => {
-        // event.preventDefault()
+    const login = async () => {
 
         try {
             let info = await API.get(endpoints["oauth2-info"])
@@ -81,13 +80,9 @@ export default function RegisterRecruiter(props) {
             }
       })
       cookies.save('user', user.data)
-    //   setLogged(true);
       history.push('add-company')
 
   }
-
-
-
 
     return(
         <>
@@ -158,13 +153,6 @@ export default function RegisterRecruiter(props) {
                     </Form>
                 </Col>
             </Row>
-                    
-                    
-            {/* <Row lg={2} className='d-flex justify-content-center'>
-                <Col>
-                
-                </Col>
-            </Row> */}
             </div>
         </Container>
         </>
@@ -172,150 +160,11 @@ export default function RegisterRecruiter(props) {
 }
 
   
-// class RegisterRecruiter extends React.Component {
-//     constructor() {
-//         super()
-//         this.user = {
-//             'email': '',
-//             'first_name': '',
-//             'last_name': '',
-//             'username': '',
-//             'phone_number': '',
-//             'is_recruiter': 1,
-//             'password': '',
-//             'comfirmpw': '',
-            
-//             // 'role': '',
-//         }
-//         this.state = {
-//             'user': this.user
-//         }
-        
-//     }
-
-//     change = (field, event) => {
-//         this.user[field] = event.target.value
-//         this.setState({'user': this.user})
-//         // console.log(this.user)
-//     }
-
-
-//     register = async (event) => {
-//         if (this.state.user.email === "" ||  this.state.user.username === ""  ||
-//         this.state.user.password === "" || this.state.user.phone_number === "" ) {
-//             alert('Vui lòng nhập đủ thông tin!')
-//         }
-//         else {
-//             if (this.state.user.password === this.state.user.comfirmpw) {
-//                 const formData = new FormData()
-//                 for (let k in this.state.user)
-//                     if (k !== 'confirmpw') 
-//                         formData.append(k, this.state.user[k])
-//                 console.log(formData)
-//                 API.post(endpoints['users'], formData)
-//                 .then((res) => {
-//                     alert('Đăng ký thành công.')
-//                     // this.props.history.push("/login");
-                    
-                    
-//                 })
-//                 .catch(err => console.error(err))
-//             }
-//             else {
-//                 alert('Mật khẩu không khớp!')
-//             }
-//         }
-//         event.preventDefault()
-//     }
-
-   
-
-
-//     render() {
-//         return (
-//             <>
-//            <Container>
-//             <Row className="justify-content-md-center" lg={2}>
-//                 <Col md="6">
-//                     <h1 className="section-tittle text-uppercase text-center">Đăng ký tuyển dụng</h1>
-//                     <Form onSubmit={this.register}>
-//                         <RegisterForm 
-//                         id="email" 
-//                         label="Email" 
-//                         type="email" 
-//                         field={this.state.user.email} 
-//                         change={this.change.bind(this, 'email')}
-//                         />
-//                         <RegisterForm 
-//                         id="username" 
-//                         label="Tên đăng nhập" 
-//                         type="text" 
-//                         field={this.state.user.username} 
-//                         change={this.change.bind(this, 'username')}/>
-//                         <Row>
-//                             <Col style={{ paddingRight: 0 }}>
-//                             <RegisterForm 
-//                             id="last_name" 
-//                             label="Họ" 
-//                             type="text" 
-//                             field={this.state.user.last_name} 
-//                             change={this.change.bind(this, 'last_name')}
-//                             />
-//                             </Col>
-//                             <Col>
-//                             <RegisterForm 
-//                             id="first_name" 
-//                             label="Tên" 
-//                             type="text" 
-//                             field={this.state.user.first_name} 
-//                             change={this.change.bind(this, 'first_name')}
-//                             style={{paddingLeft:"0"}}
-//                             />
-//                             </Col>
-//                         </Row>
-//                         <RegisterForm 
-//                         id="phone_number" 
-//                         label="Số điện thoại" 
-//                         type="text" 
-//                         field={this.state.user.phone_number} 
-//                         change={this.change.bind(this, 'phone_number')}/>
-//                         <RegisterForm 
-//                         id="password" 
-//                         label="Mật khẩu" 
-//                         type="password" 
-//                         field={this.state.user.password} 
-//                         change={this.change.bind(this, 'password')}
-//                         />
-//                         <RegisterForm 
-//                         id="comfirmpw" 
-//                         label="Xác nhận mật khẩu" 
-//                         type="password"
-//                         field={this.state.user.comfirmpw} 
-//                         change={this.change.bind(this, 'comfirmpw')}
-//                         />
-//                         <Button type="submit" className="btn btn-primary btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Tiếp tục</Button>
-//                         {/* </Col> */}
-//                     </Form>
-//                 </Col>
-//             </Row>
-                    
-                    
-//                 <Row lg={2} className='d-flex justify-content-center'>
-//                     <Col>
-                    
-//                     </Col>
-//                 </Row>
-//             </Container>
-//             </>
-//         )
-//     }
-// }
 
 export class RegisterForm extends React.Component {
     render() {
         return (
             <div className="form-group">
-            {/* <label>First name</label> */}
             <input type={this.props.type} 
             className="form-control" 
             value={this.props.field}
@@ -327,5 +176,3 @@ export class RegisterForm extends React.Component {
         )
     }
 }
-
-// export default RegisterRecruiter

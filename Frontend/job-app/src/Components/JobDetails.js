@@ -65,25 +65,7 @@ export default function JobDetails() {
             alert("Vui lòng đăng nhập")
         }
     }
-    // const applyJob = async () => {
-    //     if(user !== null && user !== undefined) {
-    //         try {
-    //             let res = await API.post(endpoints['apply-job'](postId), {} ,{
-    //                 headers: {
-    //                     "Authorization": `Bearer ${cookies.load("access_token")}`
-    //                 }
-    //             })
-    //             console.log(res.data)
-    //             alert("Ứng tuyển thành công.")
-    //         } catch (err) {
-    //             console.error(err)
-    //         }
-            
-    //     }
-    //     else {
-    //         alert("Vui lòng đăng nhập")
-    //     }
-    // }
+
 
     console.log(showForm)
     
