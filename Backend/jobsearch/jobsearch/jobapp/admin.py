@@ -71,13 +71,13 @@ class CompanyAdmin(admin.ModelAdmin):
     list_display = ["name", "address", "website", "user"]
     search_fields = ["name", "address", "user__username"]
     list_filter = ["name", "user"]
-    readonly_fields = ["avatar"]
+    readonly_fields = ["logo"]
     # inlines = (PostInLine, )
-    form = CompanyForm
-    def avatar(self, company):
+    form = CompanyForm 
+    def logo(self, company):
         return mark_safe(
-            '<img src="/static/{img_url}" atl="{alt}" width="200px"/>'
-                .format(img_url=company.image.name, alt=company.name))
+            '<img src="/static/{url}" alt="{alt}" width="200px"/>'\
+                .format(url=company.image.name, alt=company.name))
 
 
 

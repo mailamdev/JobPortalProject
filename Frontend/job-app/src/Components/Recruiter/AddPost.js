@@ -207,7 +207,7 @@ export default function AddCompany() {
                             ></Select>
                         </div>
                         <div className="row button-group">
-                        <Button onClick={addPost} variant="danger" className="button-item" size="lg">Đăng tuyển</Button>   
+                        <Button onClick={addPost} variant="primary" className="button-item" size="lg">Đăng tuyển</Button>   
                         </div>
                         </div>
                     </div>

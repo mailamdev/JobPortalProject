@@ -77,9 +77,9 @@ export default function JobDetails() {
             {showForm ? (   
                 <>
                 <Button variant="outline-secondary" onClick={() => setShowForm(false)}>Quay lại</Button>
-                <h3>
+                <h4 style={{marginTop:"12px"}}>
                     Bạn đang ứng tuyển vị trí {post.title} tại công ty {post.company.name}
-                </h3>
+                </h4>
                 <ApplyJob/>
                 
                 </>
@@ -92,8 +92,8 @@ export default function JobDetails() {
                     </div>
                     
                     <div className="job-detail__info">
-                        <h5 className="job__tittle">{post.title}
-                        </h5>
+                        <h4 className="job__tittle">{post.title}
+                        </h4>
                         <Link to={`/company/${post.company.id}/posts/`} className="company-name">{post.company.name}</Link>
 
 

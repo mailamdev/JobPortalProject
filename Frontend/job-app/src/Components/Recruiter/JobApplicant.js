@@ -36,13 +36,7 @@ export default function JobApplicant(props) {
     return (
         <>
         {(applicants === null) ?  (<Loading/>) : (
-            ( applicants.length < 1 ) ? (
-                <div className="main">
-                <Alert variant="info" className="mt-3">
-                Chưa có ứng viên
-                </Alert>
-            </div>
-            ) :
+            // :
             <div className="container-fluid bootstrap snippets bootdey main">
             <div className="row">
               <div className="profile-nav col-md-2">
@@ -72,6 +66,13 @@ export default function JobApplicant(props) {
                                    Danh sách ứng viên
                                    {applicants.map(applicant =>
                                     <h1>{applicant.user.email}</h1>)} */}
+                                
+                                {(applicants.length < 1 ) ? (
+                                    <Alert variant="info" className="mt-3" style={{width: "100%"}}>
+                                    Chưa có ứng viên
+                                    </Alert>
+                                ) : (
+                                <div>
                                 <h4>{applicants[0].post.title} - Danh sách ứng tuyển</h4>
                                 <table class="table table-hover">
                                 <thead>
@@ -95,6 +96,8 @@ export default function JobApplicant(props) {
                                 )}
                                 </tbody>
                                 </table>
+                                </div>
+                                )}
                                </Row>
                            </div>
                        </div>

@@ -220,6 +220,8 @@ table {
 /* *BUTTON */
 .button-group {
   float: right;
+  margin-left: auto;
+  margin-right: 16px;
 }
 
 .button-group .button-item {
@@ -290,8 +292,8 @@ table {
 
 /* * CKEDITOR */
 .ck-editor__editable {
-  min-height: 150px !important;
-  max-height: 250px !important;
+  min-height: 250px !important;
+  max-height: 300px !important;
 
 }
 

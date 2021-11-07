@@ -101,7 +101,7 @@ function Post(props) {
     }
     return (
         <>
-        <div class="card" style={{width: '18rem'}}>
+        <div class="card" style={{width: '18rem', marginLeft: "12px", marginBottom: "16px"}}>
         <div class="card-header">
             <h5 className="jobs__tittle">
                 <Link to={`/applicants/${props.post.id}/`}>{props.post.title}</Link>

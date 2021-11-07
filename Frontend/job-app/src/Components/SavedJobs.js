@@ -4,13 +4,16 @@ import API, { endpoints } from "../Configs/API"
 import cookies from 'react-cookies'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBookmark, faClipboard, faTimes} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBookmark, faClipboard, faTimes, faPen} from '@fortawesome/free-solid-svg-icons';
 import Loading from "./Loading"
+import userdefault from "../img/user.png";
+
 
 export default function SavedJobs() {
     let [jobs, setJobs] = useState([])
     let [user, setUser] = useState(null) 
     let [ isLoading, setLoading ] = useState(true)
+    let [avatar, setAvatar] = useState('') 
 
 
     useEffect(() => {
@@ -21,6 +24,7 @@ export default function SavedJobs() {
                 }
             })
             setUser(res.data)
+            setAvatar(res.data.avatar)
         }
         getUser()
         async function getData() {
@@ -62,10 +66,23 @@ export default function SavedJobs() {
           <div className="profile-nav col-md-3">
               <div className="panel">
                   <div className="user-heading round">
-                      <Link to="#">
-                          <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/8_avatar-512.png" alt=""/>
-                          
-                      </Link>
+                    <div className="user-avatar">
+                            {avatar !== null ? (
+                                <img src={avatar} alt=""/>
+                            ): (
+                                <img src={userdefault} alt=""/>
+                            )}
+                            {/* <Button class="edit" onClick={updateAvatar}>  */}
+                                <FontAwesomeIcon icon={faPen} className="icon">
+                                <input
+                                    type="file"
+                                    accept=".png, .jpg, .jpeg"
+                                    // ref={newAvatar}
+                                    // style={{ zIndex:"5" }}
+                                    />
+                                </FontAwesomeIcon>
+                            {/* </Button> */}
+                        </div>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
                   </div>

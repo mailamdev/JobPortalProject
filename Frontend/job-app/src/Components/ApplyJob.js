@@ -88,7 +88,7 @@ export default function ApplyJob() {
             </Slate> 
             </div> */}
             <div className="button-group">
-                <Button onClick={applyJob} variant="danger">Gửi CV</Button>   
+                <Button onClick={applyJob} variant="success" size="lg">Gửi CV</Button>   
             </div>
         </>
     )

@@ -149,8 +149,8 @@ export default function Recruitment() {
                         </div>
                     </div>
                     <div className="row button-group">
-                    <Link to={`/company/${company.id}/posts/`}><Button variant="outline-primary" className="button-item">Xem chi tiết công ty</Button></Link>
-                    <Button onClick={update} variant="danger" className="button-item">Cập nhật thông tin</Button>   
+                    <Link to={`/company/${company.id}/posts/`}><Button variant="outline-success" className="button-item">Xem chi tiết công ty</Button></Link>
+                    <Button onClick={update} variant="primary" className="button-item">Cập nhật thông tin</Button>   
                     </div>
                     
 
