@@ -7,11 +7,11 @@
     color: #fff;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
-    padding: 30px;
+    padding: 10px;
     text-align: center;
 }
 
-.profile-nav .user-heading.round a  {
+.profile-nav .user-heading.round .user-avatar  {
     border-radius: 50%;
     -webkit-border-radius: 50%;
     border: 10px solid rgba(255,255,255,0.3);
@@ -19,17 +19,17 @@
     position: relative;
 }
 
-.profile-nav .user-heading a img {
-    width: 112px;
-    height: 112px;
+.profile-nav .user-heading .user-avatar img {
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
 }
 
-.profile-nav .user-heading a .icon {
+.profile-nav .user-heading .user-avatar .icon {
     position: absolute;
-    top: 18px;
-    right: 4px;
+    top: 8px;
+    right: -4px;
     /* border: 1px solid; */
     border-radius: 50%;
     padding: 4px;
@@ -41,6 +41,7 @@
     justify-content: center;
     background-color: white;
     color: #969696;
+    border: 1px solid #dce1e2;
 }
 
 .profile-nav .user-heading h3 {

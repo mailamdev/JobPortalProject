@@ -78,17 +78,17 @@ class CompanySerializer(ModelSerializer):
         model = Company
         fields = ["id", "name", "description", "image", "address", "website", "user"]
     
-    # def create(self, validated_data):
-    #     company = Company.objects.create(user=validated_data['user'], 
-    #             name=validated_data['name'],
-    #             image=validated_data['image'],
-    #             address=validated_data['address'],
-    #             website=validated_data['website'],
-    #             post=validated_data['posts'],
-    #     )
-    #     company.save()
-        
-    #     return company 
+    def update(self, instance, validated_data):
+        instance.name = validated_data['name']
+        instance.description = validated_data['description']
+        # instance.image = validated_data['image']
+        instance.address = validated_data['address']
+        instance.website = validated_data['website']
+
+        instance.save() 
+
+        return super().update(instance, validated_data) 
+
 
 class CompanyDetailSerializer(CompanySerializer):
     class Meta:

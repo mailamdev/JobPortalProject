@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import API, { endpoints } from '../Configs/API';
-import cookies from 'react-cookies'
-import "../css/profile.css"
+import cookies from 'react-cookies';
+import "../css/profile.css";
+import userdefault from "../img/user.png";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBookmark, faClipboard, faPen} from '@fortawesome/free-solid-svg-icons';
@@ -12,12 +13,16 @@ import Loading from './Loading';
 export default function Profile() {
     let [user, setUser] = useState(null) 
     let [userId, setUserId] = useState(null) 
-    let [last_name, setLastName] = useState(null) 
-    let [first_name, setFirstName] = useState(null) 
-    let [phone_number, setPhone] = useState(null) 
-    let [email, setEmail] = useState(null) 
+
     
-    // let [avatar, setAvatar] = useState() 
+    let [last_name, setLastName] = useState('') 
+    let [first_name, setFirstName] = useState('') 
+    let [phone_number, setPhone] = useState('') 
+    let [email, setEmail] = useState('') 
+    let [avatar, setAvatar] = useState('') 
+
+    const newAvatar = useRef()
+
 
     useEffect(() => {
         async function getUser() {
@@ -26,58 +31,61 @@ export default function Profile() {
                   'Authorization':  `Bearer ${cookies.load('access_token')}`
                 }
             })
+            console.log(res.data)
+
             setUser(res.data)
             setUserId(res.data.id)
-            console.log(res.data.is_recruiter)
+            setLastName(res.data.last_name)
+            setFirstName(res.data.first_name)
+            setPhone(res.data.phone_number)
+            setEmail(res.data.email)
+            setAvatar(res.data.avatar)
+
         }
         getUser()
+            
     }, [])
+
     const update = (event) => {
         event.preventDefault()
-        console.log(userId)
-        let updataProfile = async () => {
+        let updateProfile = async () => {
             const formData = new FormData()
-            // formData.append("username", user.username)
-            if (first_name !== user.first_name) {
-                formData.append("first_name", first_name)
-            }
-            else {
-                formData.append("first_name", user.first_name)
-            }
-            if (last_name !== user.last_name) {
-                formData.append("last_name", last_name)
-            }
-            else {
-                formData.append("last_name", user.last_name)
-            }
-            if (phone_number !== user.phone_number) {
-                formData.append("phone_number", phone_number)
-            }
-            else {
-                formData.append("phone_number", user.phone_number)
-            }
-            if (email !== user.email) {
-                formData.append("email", email)
-            }
-            else {
-                formData.append("email", user.email)
-            }
+            formData.append("first_name", first_name)
+            formData.append("last_name", last_name)
+            formData.append("phone_number", phone_number)
+            formData.append("email", email)
 
-
-            let res = await API.patch(endpoints['update-info'](userId)
-            ,
-            formData,
-            {
+            try {
+                await API.patch(endpoints['update-info'](userId)
+                ,
+                formData,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${cookies.load("access_token")}`
+                    }
+                })
+            alert("Lưu thông tin thành công.")
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        updateProfile()
+    }
+    const updateAvatar = async () => {
+        const formData = new FormData()
+        formData.append("avatar", newAvatar.current.files[0])
+        try {
+            await API.patch(endpoints['update-info'](userId), 
+            formData, {
                 headers: {
+                    "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${cookies.load("access_token")}`
                 }
-            }
-            )
-            console.log(res.data)   
+            })
+        } catch (err) {
+            console.error(err)
         }
-        
-
-        updataProfile()
     }
 
     
@@ -91,10 +99,23 @@ export default function Profile() {
           <div className="profile-nav col-md-3">
               <div className="panel">
                   <div className="user-heading round">
-                      <Link to="#">
-                          <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/8_avatar-512.png" alt=""/>
-                          <FontAwesomeIcon icon={faPen} className="icon"></FontAwesomeIcon>
-                      </Link>
+                      <div className="user-avatar">
+                          {avatar !== null ? (
+                            <img src={avatar} alt=""/>
+                          ): (
+                            <img src={userdefault} alt=""/>
+                          )}
+                          {/* <Button class="edit" onClick={updateAvatar}>  */}
+                              <FontAwesomeIcon icon={faPen} className="icon">
+                              <input
+                                type="file"
+                                accept=".png, .jpg, .jpeg"
+                                ref={newAvatar}
+                                // style={{ zIndex:"5" }}
+                                />
+                              </FontAwesomeIcon>
+                          {/* </Button> */}
+                      </div>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
                   </div>
@@ -103,9 +124,6 @@ export default function Profile() {
                       <li className="active"><Link to="#"> 
                         <FontAwesomeIcon icon={faUser} className="icon"></FontAwesomeIcon>
                           Thông tin cá nhân</Link></li>
-                      {/* <li><Link to="#"> 
-                      <FontAwesomeIcon icon={faFileAlt} className="icon"></FontAwesomeIcon>
-                        Quản lý CV</Link></li> */}
                       <li><Link to="/saved-jobs"> 
                       <FontAwesomeIcon icon={faBookmark} className="icon"></FontAwesomeIcon>
                         Việc làm đã lưu</Link></li>
@@ -172,27 +190,11 @@ export default function Profile() {
                                  />
                             </div>
                         </div>
-                        {/* <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div className="form-group">
-                                <label >Cập nhật ảnh đại diện:  </label>
-                                <br/>
-                                <input id="file" type="file" />
-                            </div>
-                        </div> */}
                         <div className="button-group">
                             <Button type="submit" className="btn btn-primary mt-2">Lưu thông tin</Button>
                         </div>
                     </div>
                     </Form>
-
-                    {/* <div className="row gutters">
-                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div className="text-right">
-                                
-                                <button type="button" id="submit" name="submit" className="btn btn-primary mt-3">Lưu thông tin</button>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
             </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import API, { endpoints } from '../../Configs/API'
 import cookies from 'react-cookies'
 import Loading from "../Loading"
-import { Row } from "react-bootstrap"
+import { Button, Row } from "react-bootstrap"
 import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,6 @@ import Moment from 'react-moment';
 
 
 export default function RecruitmentJob() {
-    // let [ isLoading, setLoading ] = useState(true)
     const user = cookies.load('user')
     let [company, setCompany] = useState(null) 
     let [posts, setPosts] = useState(null) 
@@ -35,20 +34,11 @@ export default function RecruitmentJob() {
                 setPosts(res.data)
             }
             getPosts()
-            // async function getApplicants() {
-            //     let res = await API.get(endpoints["applicants"](postId), {
-            //         headers: {
-            //         'Authorization':  `Bearer ${cookies.load('access_token')}`
-            //         }
-            //     })
-            //     setPosts(res.data)
-            // }
-            // getPosts()
         }
-    }, [company])
+    }, [user.id, company])
 
-   
-    console.log(posts)
+
+    
 
     return(
         <>
@@ -95,6 +85,20 @@ export default function RecruitmentJob() {
 }
 
 function Post(props) {
+    const hideJob = async (postId) => {
+        try {
+            let res = await API.post(endpoints['hide-jobs'](postId) ,{}, {
+                headers: {
+                    "Authorization": `Bearer ${cookies.load("access_token")}`
+                }
+            })
+            console.log(res.data)
+            alert("Đã ẩn bài đăng.")
+        } catch (err) {
+            console.error(err)
+            
+        }
+    }
     return (
         <>
         <div class="card" style={{width: '18rem'}}>
@@ -111,8 +115,16 @@ function Post(props) {
             Đã cập nhật: <Moment fromNow>{props.post.update_date}</Moment>
             </li>
             <li class="list-group-item">
+            <Button variant="outline-info" size="sm" style={{marginRight:"10px"}}>
                 <Link to={`/posts/${props.post.id}/`}>Xem bài đăng</Link>
+            </Button>
+            <Button onClick={() => hideJob(props.post.id)}
+            variant="outline-dark" size="sm"
+            >
+                Dừng tuyển
+            </Button>   
             </li>
+            
         </ul>
         </div>
             

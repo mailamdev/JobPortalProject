@@ -45,11 +45,11 @@ class UserViewSet(viewsets.ViewSet,
     def get_object(self):
         return self.request.user
 
-    @action(methods=['get'], detail=True, url_path="saved-jobs")
-    def get_saved_jobs(self, request, pk):
-        jobs = self.get_object().saved_jobs.all()
+    # @action(methods=['get'], detail=True, url_path="saved-jobs")
+    # def get_saved_jobs(self, request, pk):
+    #     jobs = self.get_object().saved_jobs.all()
         
-        return Response(SavedPostSerializer(jobs, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
+    #     return Response(SavedPostSerializer(jobs, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
 
 
         
@@ -70,13 +70,12 @@ class PostViewSet(viewsets.ViewSet,
                     generics.RetrieveAPIView, 
                     # generics.UpdateAPIView
                     ):
-    # queryset = Post.objects.filter(active=True)
     serializer_class = PostDetailSerializer 
     pagination_class =  PostPanigation
     parser_classes = [MultiPartParser, ]
 
     def get_permissions(self):
-        if self.action in ['save_job']:
+        if self.action in ['hide_post']:
             return [permissions.IsAuthenticated()]
             
         return [permissions.AllowAny()]
@@ -88,17 +87,17 @@ class PostViewSet(viewsets.ViewSet,
         return super().get_parsers()
     
     # ẨN BÀI VIẾT
-    # @action(methods=['POST'], detail=True, url_path="hide-post", url_name="hide-post")
+    @action(methods=['POST'], detail=True, url_path="hide-post", url_name="hide-post")
     # /posts/{pk}/hide-post
-    # def hide_post(self, request, pk):
-    #     try: 
-    #         p = Post.objects.get(pk=pk)
-    #         p.active = False
-    #         p.save()
-    #     except Post.DoesNotExist: 
-    #         return Response(status=status.HTTP_400_BAD_REQUEST)
+    def hide_post(self, request, pk):
+        try: 
+            p = Post.objects.get(pk=pk)
+            p.active = False
+            p.save()
+        except Post.DoesNotExist: 
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    #     return Response(data=PostSerializer(p, context={'request': request}).data, status=status.HTTP_200_OK)
+        return Response(data=PostSerializer(p, context={'request': request}).data, status=status.HTTP_200_OK)
 
     # Có pk thì detail = true
 
@@ -187,14 +186,11 @@ class AddPostViewSet(viewsets.ViewSet, generics.CreateAPIView):
         salary = request.data['salary']
         location = Location.objects.get(id=request.data['location'])
         company = Company.objects.get(id=request.data['company'])
-        # skill_tags = request.data['skilltag']
 
         post = Post.objects.create(creater=creater, title=title, content=content, job_type=job_type, level=level, salary=salary, location=location, company=company, )
         post.save()
 
         skill_list = list(request.data['skilltag'].split(','))
-        # for skill in skill_list:
-        #     post.skill_tags.add(SkillTag.objects.get(pk=skill))
 
         for index in range(len(skill_list)):
             post.skill_tags.add(SkillTag.objects.get(pk=skill_list[index]))
@@ -221,26 +217,16 @@ class AddCompanyViewSet(viewsets.ViewSet, generics.CreateAPIView):
         return Response(CompanySerializer(company, context={'request': self.request}).data, status=status.HTTP_200_OK)    
 
 
-class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAPIView, generics.CreateAPIView):
+class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAPIView, generics.CreateAPIView, generics.UpdateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanyDetailSerializer
-    # serializer_class = CompanySerializer
-    # pagination_class =  CompanyPanigation
     
     def get_serializer_context(self):
         context = {'request': self.request}
         return context  
 
-    # def get_queryset(self):
-    #     companies = Company.objects.all()
-    #     q = self.request.query_params.get('q')
-    #     if q is not None:
-    #         companies = companies.filter(name__icontains=q)
-    #     q = self.request.query_params.get('company_id')
-
     @action(methods=['get'], detail=True, url_path="posts")
     def get_posts(self, request, pk):
-        # company = Company.objects.get(pk=pk)
         posts = self.get_object().posts.filter(active=True)
         
         return Response(PostSerializer(posts, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
@@ -254,18 +240,14 @@ class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAP
 
     
 
-# @login_required
 class SavedPostViewSet(viewsets.ViewSet, 
                         generics.ListAPIView, 
                         # generics.CreateAPIView, 
                         generics.DestroyAPIView,
                         generics.RetrieveAPIView
                         ):
-    # queryset = SavedJobs.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = SavedPostSerializer
-
-
 
     def get_queryset(self):
         user = self.request.user
@@ -291,15 +273,6 @@ class AppliedJobViewSet(viewsets.ViewSet,
 
         return posts
 
-# class ApplicantViewSet(viewsets.ViewSet, 
-#                         generics.ListAPIView, 
-#                         generics.RetrieveAPIView
-#                         ):
-#     permission_classes = [permissions.IsAuthenticated]
-#     serializer_class = AppliedJobSerializer
-#     def get_queryset(self):
-#         post = self.get_object().posts.filter(active=True)
-#         return Applied_Job.objects.filter(company=company)
 
 class SkillTagViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = SkillTag.objects.all()
