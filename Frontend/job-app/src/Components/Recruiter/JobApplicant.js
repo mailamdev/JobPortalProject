@@ -1,4 +1,3 @@
-import cookies from 'react-cookies'
 import { useEffect, useState } from 'react'
 import API, { endpoints } from '../../Configs/API'
 import {useParams} from 'react-router-dom'
@@ -7,6 +6,7 @@ import { Alert, Row } from "react-bootstrap"
 import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
+import Moment from 'react-moment';
 
 
 export default function JobApplicant(props) {
@@ -24,14 +24,7 @@ export default function JobApplicant(props) {
             setApplicant(res.data)
         }
         getApplicant()
-    }, [])
-    console.log(applicants)
-
-// {
-//     headers: {
-//         'Authorization':  `Bearer ${cookies.load('access_token')}`
-//     }
-// }
+    }, [postId])
 
     return (
         <>
@@ -39,7 +32,7 @@ export default function JobApplicant(props) {
             // :
             <div className="container-fluid bootstrap snippets bootdey main">
             <div className="row">
-              <div className="profile-nav col-md-2">
+              <div className="profile-nav col-xl-2 col-lg-12 col-md-12 col-xs-12">
                   <div className="panel">
                       <ul className="nav nav-pills nav-stacked">
                           <li><Link to="/recruitment"> 
@@ -60,8 +53,8 @@ export default function JobApplicant(props) {
               <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
                    <div className="card h-100">
                        <div className="card-body">
-                           <div className="jobs-wrap">
-                               <Row>
+                           {/* <div className="jobs-wrap"> */}
+                               <Row className="job-applicants">
                                    {/* 
                                    Danh sách ứng viên
                                    {applicants.map(applicant =>
@@ -73,8 +66,9 @@ export default function JobApplicant(props) {
                                     </Alert>
                                 ) : (
                                 <div>
-                                <h4>{applicants[0].post.title} - Danh sách ứng tuyển</h4>
-                                <table class="table table-hover">
+                                <h4 className="text-center">{applicants[0].post.title} - Danh sách ứng tuyển</h4>
+                                <div class="table-responsive">
+                                <table className="table table-hover table-responsive">
                                 <thead>
                                     <tr>
                                     <th scope="col">Email</th>
@@ -82,24 +76,28 @@ export default function JobApplicant(props) {
                                     <th scope="col">Tên</th>
                                     <th scope="col">Giới thiệu</th>
                                     <th scope="col">CV</th>
+                                    <th scope="col">Ngày</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {applicants.map(applicant => 
-                                    <tr>
-                                        <td scope="row">{applicant.user.email}</td>
+                                    <tr key={applicant.user.id}>
+                                        <td>{applicant.user.email}</td>
                                         <td>{applicant.user.phone_number}</td>
                                         <td>{applicant.user.first_name}</td>
                                         <td>{applicant.summary}</td>
-                                        <td><a href={applicant.cv} target="_blank" >Xem CV</a></td>
+                                        <td><a href={applicant.cv} target="_blank" rel="noreferrer">Xem CV</a></td>
+                                        <td><Moment format="DD/MM/YYYY">{applicant.date_applied}</Moment></td>
+
                                     </tr>
                                 )}
                                 </tbody>
                                 </table>
                                 </div>
+                                </div>
                                 )}
                                </Row>
-                           </div>
+                           {/* </div> */}
                        </div>
                    </div>
                 </div>

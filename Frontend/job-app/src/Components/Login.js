@@ -34,7 +34,7 @@ export default function Login(props) {
 
             cookies.save('access_token', res.data.access_token)
         } catch (err) {
-            console.error(err)
+            alert("Sai tên đăng nhập hoặc mật khẩu.")
         }
 
       let user = await API.get(endpoints['current-user'], {

@@ -90,7 +90,7 @@ export default function ApplyJob() {
             <div className="button-group">
                 <Button onClick={applyJob} variant="success" size="lg">Gửi CV</Button>   
             </div>
-        </>
+        </> 
     )
 
 }

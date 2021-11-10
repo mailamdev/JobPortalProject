@@ -5,16 +5,16 @@ from .models import Applied_Job, Level, JobType, Location, Post, Company, SavedJ
 from rest_framework import serializers
 
 class UserSerializer(ModelSerializer):
-    # avatar = serializers.SerializerMethodField()
+    avatar = serializers.SerializerMethodField()
     
-    # def get_avatar(self, obj):
-    #     request = self.context['request']
-    #     if obj.avatar.name.startswith('static/'):
-    #         path = "/%s" % obj.avatar.name
-    #     else:
-    #         path = '/static/%s' % (obj.avatar)
+    def get_avatar(self, obj):
+        request = self.context['request']
+        if obj.avatar.name.startswith('static/'):
+            path = "/%s" % obj.avatar.name
+        else:
+            path = '/static/%s' % (obj.avatar)
 
-    #     return request.build_absolute_uri(path)
+        return request.build_absolute_uri(path)
 
     class Meta:
         model = User
@@ -30,15 +30,15 @@ class UserSerializer(ModelSerializer):
         
         return user
     
-    def update(self, instance, validated_data):
-        instance.first_name = validated_data['first_name']
-        instance.last_name = validated_data['last_name']
-        instance.email = validated_data['email']
-        instance.phone_number = validated_data['phone_number']
+    # def update(self, instance, validated_data):
+    #     instance.first_name = validated_data['first_name']
+    #     instance.last_name = validated_data['last_name']
+    #     instance.email = validated_data['email']
+    #     instance.phone_number = validated_data['phone_number']
 
-        instance.save() 
+    #     instance.save() 
 
-        return super().update(instance, validated_data)
+    #     return super().update(instance, validated_data)
 
 
 class SkillTagSerializer(ModelSerializer):
@@ -78,16 +78,17 @@ class CompanySerializer(ModelSerializer):
         model = Company
         fields = ["id", "name", "description", "image", "address", "website", "user"]
     
-    def update(self, instance, validated_data):
-        instance.name = validated_data['name']
-        instance.description = validated_data['description']
-        # instance.image = validated_data['image']
-        instance.address = validated_data['address']
-        instance.website = validated_data['website']
+    # def update(self, instance, validated_data):
+    #     instance.name = validated_data['name']
+    #     instance.description = validated_data['description']  
+    #     instance.address = validated_data['address']
+    #     instance.website = validated_data['website']
+    #     if 'image' in validated_data:
+    #         instance.image = validated_data.pop('image')    
 
-        instance.save() 
+    #     instance.save() 
 
-        return super().update(instance, validated_data) 
+    #     return super().update(instance, validated_data) 
 
 
 class CompanyDetailSerializer(CompanySerializer):

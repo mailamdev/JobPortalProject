@@ -1,14 +1,13 @@
 import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import cookies from 'react-cookies'
 import { Link } from 'react-router-dom'
 import API, { endpoints } from '../../Configs/API'
 import Loading from '../Loading'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 
 export default function Recruitment() {
@@ -17,7 +16,7 @@ export default function Recruitment() {
     let [company, setCompany] = useState(null) 
     let [name, setName] = useState('')
     let [description, setDescription] = useState('')
-    let image = useRef()
+    const newImage = useRef()
     let [address, setAddress] = useState('')
     let [website, setWebsite] = useState('')
 
@@ -53,18 +52,21 @@ export default function Recruitment() {
             formData.append("description", description)
             formData.append("address", address)
             formData.append("website", website)
-
-
+            if (newImage.current.files[0] !== undefined) {
+                formData.append("image", newImage.current.files[0])
+            }
             try {
                 await API.patch(endpoints['update-company'](company.id)
                 ,
                 formData,
                 {
                     headers: {
+                        "Content-Type": "multipart/form-data",
                         "Authorization": `Bearer ${cookies.load("access_token")}`
                     }
                 })
             alert("Lưu thông tin thành công.")
+            window.location.reload()
             }
             catch (err) {
                 console.log(err)
@@ -78,7 +80,7 @@ export default function Recruitment() {
         {company ? (
         <div className="container-fluid bootstrap snippets bootdey main">
         <div className="row">
-          <div className="profile-nav col-md-2">
+          <div className="profile-nav col-xl-2 col-lg-12 col-md-12 col-xs-12">
               <div className="panel">
                   <ul className="nav nav-pills nav-stacked">
                       <li className="active"><Link to="#"> 
@@ -93,7 +95,7 @@ export default function Recruitment() {
                   </ul>
               </div>
           </div>
-          <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+          <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="card h-100">
                     <div className="card-body">
                     <div className="form-group row form-row field-name">
@@ -125,7 +127,7 @@ export default function Recruitment() {
                         </label>
                         <div className="col-sm-10">
                         <img src={company.image} alt={company.name}  className="recruitment-company-img"/>
-                        <input type="file" ref={image} />  
+                        <input type="file" accept=".png, .jpg, .jpeg" ref={newImage} />  
                         </div>
                     </div>
                     <div className="form-group row form-row field-name">

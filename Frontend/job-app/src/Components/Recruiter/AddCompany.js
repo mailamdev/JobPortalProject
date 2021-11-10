@@ -71,7 +71,7 @@ export default function AddCompany() {
                     <span>Tên công ty:</span>
                 </label>
                 <div className="col-sm-10">
-                    <input style={{width: "370px"}} type="text" 
+                    <input type="text" className="add-company-input"
                     value={name} onChange={(event) => setName(event.target.value)}
                     />
                 </div>
@@ -100,7 +100,7 @@ export default function AddCompany() {
                     <span>Địa chỉ công ty:</span>
                 </label>
                 <div className="col-sm-10">
-                    <input style={{width: "370px"}} type="text"
+                    <input className="add-company-input" type="text"
                     value={address} onChange={(event) => setAddress(event.target.value)}
                     />
                 </div>
@@ -110,7 +110,7 @@ export default function AddCompany() {
                     <span>Website công ty:</span>
                 </label>
                 <div className="col-sm-10">
-                    <input style={{width: "370px"}} type="text"
+                    <input className="add-company-input" type="text"
                     value={website} onChange={(event) => setWebsite(event.target.value)}
                     />
                 </div>

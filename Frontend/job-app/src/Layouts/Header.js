@@ -3,7 +3,7 @@ import logo from '../img/logo.png';
 import { NavLink } from 'react-router-dom'
 import cookies from 'react-cookies'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSortDown, faUserCircle, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useStore } from 'react-redux';
 import { NavDropdown } from 'react-bootstrap';
 import { DropdownSubmenu, NavDropdownMenu} from "react-bootstrap-submenu";
@@ -82,21 +82,20 @@ export default function Header() {
     }
 
 
-    let navbarMenu = <>
+    let navbarMenu = <div className="login-logout">
         <NavLink to='/login' className='nav-links btn btn-info btn-md' onClick={closeMobileMenu}>
             Đăng nhập
         </NavLink>
         <NavLink to='/register' className='nav-links btn btn-outline-success btn-md' onClick={closeMobileMenu}>
             Đăng ký
         </NavLink>
-        
-    </>
+    </div>
     
     
     if (user != null) {
         navbarMenu = <> 
         <div className='user'>
-        <FontAwesomeIcon icon={faUserCircle}  className="icon"></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faUserCircle}  className="icon icon-user"></FontAwesomeIcon>
         <span className='user-name'>{user.last_name} {user.first_name}</span>
         <FontAwesomeIcon icon={faSortDown}  className="icon icon-dropdown"></FontAwesomeIcon>
         {dropdownMenu}
@@ -113,12 +112,17 @@ export default function Header() {
         {/* <Container fluid> */}
             <nav className="navbar justify-content-md-center">
                 <div className="navbar-container">
-                    <NavLink to="/" className="navbar-logo"><img src={logo} alt=""/></NavLink>
+                    
                     <div className="menu-icon" onClick={handleClick}>
-                        <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
+                        {click ? (
+                            <FontAwesomeIcon icon={faTimes}  className="icon"></FontAwesomeIcon>
+                        ) : (
+                            <FontAwesomeIcon icon={faBars}  className="icon"></FontAwesomeIcon>
+                        )}
                     </div>
-                    <div className={click ? 'nav-menu active' : 'nav-menu'}>
-                        <div className="navbar-list-left">
+                    <NavLink to="/" className="navbar-logo"><img src={logo} alt=""/></NavLink>
+                    <div className="nav-menu">
+                        <div className={click ?"navbar-list-left active" : "navbar-list-left" }>
                             <NavLink to='/' className='nav-links' onClick={closeMobileMenu}>
                                 Trang chủ
                             </NavLink>

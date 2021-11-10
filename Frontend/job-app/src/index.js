@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducer } from './Configs/UserReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./css/responsive.css"
 import "./css/base.css"
 import "./css/main.css"
 

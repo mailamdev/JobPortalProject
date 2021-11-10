@@ -5,7 +5,7 @@ import "../css/profile.css";
 import userdefault from "../img/user.png";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBookmark, faClipboard, faPen} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBookmark, faClipboard} from '@fortawesome/free-solid-svg-icons';
 import { Button, Form } from 'react-bootstrap';
 import Loading from './Loading';
 
@@ -54,6 +54,9 @@ export default function Profile() {
             formData.append("last_name", last_name)
             formData.append("phone_number", phone_number)
             formData.append("email", email)
+            if (newAvatar.current.files[0] !== undefined) {
+                formData.append("avatar", newAvatar.current.files[0])
+            }
 
             try {
                 await API.patch(endpoints['update-info'](userId)
@@ -65,6 +68,7 @@ export default function Profile() {
                     }
                 })
             alert("Lưu thông tin thành công.")
+            window.location.reload()
             }
             catch (err) {
                 console.log(err)
@@ -72,22 +76,6 @@ export default function Profile() {
         }
         updateProfile()
     }
-    const updateAvatar = async () => {
-        const formData = new FormData()
-        formData.append("avatar", newAvatar.current.files[0])
-        try {
-            await API.patch(endpoints['update-info'](userId), 
-            formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${cookies.load("access_token")}`
-                }
-            })
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
     
 
 
@@ -96,25 +84,15 @@ export default function Profile() {
         {user ? (
         <div className="container bootstrap snippets bootdey main">
         <div className="row">
-          <div className="profile-nav col-md-3">
+          <div className="profile-nav col-md-12 col-xs-12 col-lg-3">
               <div className="panel">
                   <div className="user-heading round">
                       <div className="user-avatar">
-                          {avatar !== null ? (
+                          {avatar !== 'http://127.0.0.1:8000/static/' ? (
                             <img src={avatar} alt=""/>
                           ): (
                             <img src={userdefault} alt=""/>
                           )}
-                          {/* <Button class="edit" onClick={updateAvatar}>  */}
-                              <FontAwesomeIcon icon={faPen} className="icon">
-                              <input
-                                type="file"
-                                accept=".png, .jpg, .jpeg"
-                                ref={newAvatar}
-                                // style={{ zIndex:"5" }}
-                                />
-                              </FontAwesomeIcon>
-                          {/* </Button> */}
                       </div>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
@@ -186,6 +164,14 @@ export default function Profile() {
                                  onChange={(event) => setEmail(event.target.value)}
                                  />
                             </div>
+                        </div>
+                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <label className="mr-2">Ảnh đại diện: </label>
+                            <input
+                                type="file"
+                                accept=".png, .jpg, .jpeg"
+                                ref={newAvatar}
+                                />
                         </div>
                         <div className="button-group">
                             <Button type="submit" className="btn btn-primary mt-2">Cập nhật thông tin</Button>

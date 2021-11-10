@@ -46,8 +46,8 @@ export default function SavedJobs() {
         <>
         {isLoading ?  (<Loading/>) : (
         <div className="container bootstrap snippets bootdey main">
-        <div className="row" style={{flexWrap: 'nowrap'}}>
-          <div className="profile-nav col-md-3">
+        <div className="row">
+          <div className="profile-nav col-md-12 col-xs-12 col-lg-3">
               <div className="panel">
                   <div className="user-heading round">
                   <div className="user-avatar">
@@ -115,7 +115,8 @@ export default function SavedJobs() {
                             </div>
                         </div>
                         
-                        <div className="applied-time">Đã ứng tuyển: <Moment fromNow>{job.date_applied}</Moment> </div>
+                        <div className="applied-time">Ngày ứng tuyển:&ensp;
+                        <Moment format="DD/MM/YYYY">{job.date_applied}</Moment></div>
                         <div><a href={job.cv}>Xem CV</a></div>
                     </div>
                 </Col>

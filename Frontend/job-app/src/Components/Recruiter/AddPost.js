@@ -7,7 +7,7 @@ import cookies from 'react-cookies'
 import {faClipboard, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
-import Select, { OnChangeValue} from 'react-select'
+import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated()
@@ -20,7 +20,6 @@ export default function AddCompany() {
     const [salary, setSalary] = useState('')
     const [location, setLocation] = useState('')
     const [company, setCompany] = useState('')
-    const [skilltag, setSkilltag] = useState('')
     const user = cookies.load('user')
 
     // Load thông tin từ API
@@ -58,7 +57,7 @@ export default function AddCompany() {
             setCompany(res.data.id)
         }
         getCompanyId()
-    }, [])
+    }, [user.id])
 
     const skillOption = skills.map(skill => {
         return {value: skill.id, label: skill.name}
@@ -109,7 +108,7 @@ export default function AddCompany() {
         <>
         <div className="container-fluid bootstrap snippets bootdey main">
              <div className="row">
-               <div className="profile-nav col-md-2">
+               <div className="profile-nav col-xl-2 col-lg-12 col-md-12 col-xs-12">
                    <div className="panel">
                        <ul className="nav nav-pills nav-stacked">
                            <li><Link to="/recruitment"> 
@@ -124,7 +123,7 @@ export default function AddCompany() {
                        </ul>
                    </div>
                </div>
-               <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+               <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="card h-100">
                         <div className="card-body">
                         <div className="form-group row form-row field-name">
@@ -132,7 +131,7 @@ export default function AddCompany() {
                                 <span>Tiêu đề:</span>
                             </label>
                             <div className="col-sm-10">
-                                <input style={{width: "500px"}} type="text" 
+                                <input type="text" className="add-post-input"
                                 value={title} onChange={(event) => setTitle(event.target.value)}
                                 />
                             </div>
@@ -160,7 +159,7 @@ export default function AddCompany() {
                             {types.map(type => {
                             return <option value={type.id} key={type.id}>{type.name}</option>})}
                             </select> 
-                            <label htmlFor="level" className="col-form-label ml-5 mr-3"
+                            <label htmlFor="level" className="col-form-label add-post-label"
                             >Cấp bậc:</label>
                             <select className="form-control col-sm-2" id="level"
                             onChange={(event) => setLevel(event.target.value)}>
@@ -168,7 +167,7 @@ export default function AddCompany() {
                             {levels.map(level => {
                             return <option value={level.id} key={level.id}>{level.name}</option>})}
                             </select> 
-                            <label htmlFor="location" className="col-form-label ml-5 mr-3"
+                            <label htmlFor="location" className="col-form-label add-post-label"
                             >Địa điểm làm việc:</label>
                             <select className="form-control col-sm-2" id="location"
                             onChange={(event) => setLocation(event.target.value)}>
@@ -185,7 +184,7 @@ export default function AddCompany() {
                                 <span>Mức lương:</span>
                             </label>
                             <div className="col-sm-10">
-                                <input style={{width: "500px"}} type="text" 
+                                <input type="text" className="add-post-input"
                                 value={salary} onChange={(event) => setSalary(event.target.value)}
                                 />
                             </div>

@@ -28,8 +28,12 @@ class UserViewSet(viewsets.ViewSet,
                 generics.CreateAPIView, 
                 generics.UpdateAPIView):
     queryset = User.objects.filter(is_active=True)
-    serializer_class = UserSerializer
     parser_class = [MultiPartParser, ]
+    serializer_class = UserSerializer
+
+    def get_serializer_context(self):
+        context = {'request': self.request}
+        return context  
 
     def get_permissions(self):
         if self.action == 'current_user':
@@ -38,18 +42,26 @@ class UserViewSet(viewsets.ViewSet,
         return [permissions.AllowAny()]
 
 
+
     @action(methods=['get'], detail=False, url_path='current-user')
     def current_user(self, request):
-        return Response(self.serializer_class(request.user).data)
+        return Response(self.serializer_class(request.user, context={'request': self.request}).data)
 
     def get_object(self):
         return self.request.user
 
-    # @action(methods=['get'], detail=True, url_path="saved-jobs")
-    # def get_saved_jobs(self, request, pk):
-    #     jobs = self.get_object().saved_jobs.all()
+    def update(self, request,  *args, **kwargs):
+        user = self.get_object()
+        user.first_name = request.data['first_name']
+        user.last_name = request.data['last_name']
+        user.email = request.data['email']
+        user.phone_number = request.data['phone_number']
         
-    #     return Response(SavedPostSerializer(jobs, many=True, context={'request': request}).data, status=status.HTTP_200_OK)
+        if 'avatar' in request.data:
+            user.avatar = request.data['avatar']
+
+        user.save()
+        return Response(UserSerializer(user, context={'request': self.request}).data, status=status.HTTP_200_OK)   
 
 
         
@@ -59,16 +71,15 @@ class AuthInfo(APIView):
 
 
 class PostPanigation(PageNumberPagination):
-      page_size = 6
+      page_size = 10
 
 class CompanyPanigation(PageNumberPagination):
-      page_size = 4
+      page_size = 6
 
 
 class PostViewSet(viewsets.ViewSet,
                     generics.ListAPIView, 
-                    generics.RetrieveAPIView, 
-                    # generics.UpdateAPIView
+                    generics.RetrieveAPIView
                     ):
     serializer_class = PostDetailSerializer 
     pagination_class =  PostPanigation
@@ -220,7 +231,10 @@ class AddCompanyViewSet(viewsets.ViewSet, generics.CreateAPIView):
 class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAPIView, generics.CreateAPIView, generics.UpdateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanyDetailSerializer
-    
+    parser_class = [MultiPartParser, ]
+    pagination_class =  CompanyPanigation
+
+
     def get_serializer_context(self):
         context = {'request': self.request}
         return context  
@@ -237,6 +251,18 @@ class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAP
         company = Company.objects.get(user=user)
 
         return Response(CompanyDetailSerializer(company, context={'request': request}).data, status=status.HTTP_200_OK)
+
+    def update(self, request,  *args, **kwargs):
+        user = request.user
+        company = Company.objects.get(user=user)
+        company.name = request.data['name']
+        company.description = request.data['description']
+        company.address = request.data['address']
+        company.website = request.data['website']
+        if 'image' in request.data:
+            company.image = request.data['image']
+        company.save()
+        return Response(CompanySerializer(company, context={'request': self.request}).data, status=status.HTTP_200_OK)    
 
     
 

@@ -8,7 +8,7 @@ import {
   } from 'react-bootstrap';
 
 import API, { endpoints } from '../Configs/API';
-import { Redirect, useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 
   
 class Register extends React.Component {

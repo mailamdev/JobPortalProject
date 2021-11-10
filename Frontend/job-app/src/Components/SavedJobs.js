@@ -62,8 +62,8 @@ export default function SavedJobs() {
         <>
         {isLoading ?  (<Loading/>) : (
         <div className="container bootstrap snippets bootdey main">
-        <div className="row" style={{flexWrap: 'nowrap'}}>
-          <div className="profile-nav col-md-3">
+        <div className="row">
+          <div className="profile-nav col-md-12 col-xs-12 col-lg-3">
               <div className="panel">
                   <div className="user-heading round">
                     <div className="user-avatar">
@@ -112,7 +112,7 @@ export default function SavedJobs() {
                     )) */}
 
                     <div className="jobs-wrap">
-                <Row style={{flexWrap: 'wrap'}}>
+                <Row className="row-saved-jobs">
                     {jobs.map(job =>
                     <Col xs={12} md={6} lg={6}>
                     <div className="jobs-item" style={{position: 'relative'}}>

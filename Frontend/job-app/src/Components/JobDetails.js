@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import {Link, useParams} from 'react-router-dom'
 import API, { endpoints } from '../Configs/API';
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Loading from "./Loading";
 import cookies from 'react-cookies'
 import ApplyJob from "./ApplyJob";
@@ -84,7 +84,7 @@ export default function JobDetails() {
                 
                 </>
             ) : (
-            <Row md={12}>
+            <div>
                 <div className="job-detail-wrap">
                 <div className="job-detail">
                     <div className="job-detail__logo-company">
@@ -123,7 +123,7 @@ export default function JobDetails() {
                     <div className="job-detail__btn">
                     <div className="job-detail__info-item-time">
                         <FontAwesomeIcon icon={faCalendarDay} className="icon"></FontAwesomeIcon>
-                        <Moment fromNow>{post.update_date}</Moment>
+                        <Moment format="DD/MM/YYYY">{post.update_date}</Moment>
                     </div>
                     <Button onClick={applied} className="job-detai__btn-item" variant="success">Ứng tuyển ngay</Button>
                     <Button onClick={saveJob} className="job-detai__btn-item" variant="outline-danger">Lưu tin</Button>
@@ -141,7 +141,7 @@ export default function JobDetails() {
                         </div>
                 </div>
                 </div>
-            </Row>
+            </div>
             )}
             </div>
         </Container>) : 

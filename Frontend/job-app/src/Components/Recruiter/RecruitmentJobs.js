@@ -45,7 +45,7 @@ export default function RecruitmentJob() {
         {posts === null ?  (<Loading/>) : (
              <div className="container-fluid bootstrap snippets bootdey main">
              <div className="row">
-               <div className="profile-nav col-md-2">
+               <div className="profile-nav col-xl-2 col-lg-12 col-md-12 col-xs-12">
                    <div className="panel">
                        <ul className="nav nav-pills nav-stacked">
                            <li><Link to="/recruitment"> 
@@ -63,7 +63,7 @@ export default function RecruitmentJob() {
                        </ul>
                    </div>
                </div>
-               <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+               <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="card h-100">
                         <div className="card-body">
                             <div className="jobs-wrap">
@@ -101,20 +101,21 @@ function Post(props) {
     }
     return (
         <>
-        <div class="card" style={{width: '18rem', marginLeft: "12px", marginBottom: "16px"}}>
-        <div class="card-header">
+        <div className="card" style={{width: '18rem', marginLeft: "12px", marginBottom: "16px"}}>
+        <div className="card-header">
             <h5 className="jobs__tittle">
                 <Link to={`/applicants/${props.post.id}/`}>{props.post.title}</Link>
             </h5>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
+        <ul className="list-group list-group-flush">
+            <li className="list-group-item">
             Số lượng ứng tuyển: {Object.values(props.post.applicant).flat().length}
             </li>
-            <li class="list-group-item">
-            Đã cập nhật: <Moment fromNow>{props.post.update_date}</Moment>
+            <li className="list-group-item">
+            Ngày cập nhật:&ensp;
+            <Moment format="DD/MM/YYYY">{props.post.update_date}</Moment>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
             <Button variant="outline-info" size="sm" style={{marginRight:"10px"}}>
                 <Link to={`/posts/${props.post.id}/`}>Xem bài đăng</Link>
             </Button>
