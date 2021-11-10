@@ -43,9 +43,6 @@ export default function RegisterRecruiter(props) {
                 .then((res) => {
                     // alert('Đăng ký thành công.')
                     login();
-                    
-                    
-
                 })
                 .catch(err => console.error(err))
             }
@@ -81,7 +78,7 @@ export default function RegisterRecruiter(props) {
       })
       cookies.save('user', user.data)
       history.push('add-company')
-
+    //   this.props.history.push("/add-company");
   }
 
     return(

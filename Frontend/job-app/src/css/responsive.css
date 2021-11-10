@@ -184,6 +184,23 @@
         width: 100%;
     }
 
+    .slider .main-heading {
+        font-size: 28px;
+    }
+    .slider .sub-heading {
+        font-size: 16px;
+    }
+
+    .slider .img-fluid {
+        display: flex;
+        margin: 0 auto;
+        width: 80%;
+    }
+    .jumbotron {
+        margin-bottom: 0;
+        padding: 2rem 1rem 1rem;
+    }
+
     .job-detail {
         flex-wrap: wrap;
     }

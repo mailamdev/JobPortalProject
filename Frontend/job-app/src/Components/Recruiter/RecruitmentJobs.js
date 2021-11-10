@@ -104,7 +104,7 @@ function Post(props) {
         <div className="card" style={{width: '18rem', marginLeft: "12px", marginBottom: "16px"}}>
         <div className="card-header">
             <h5 className="jobs__tittle">
-                <Link to={`/applicants/${props.post.id}/`}>{props.post.title}</Link>
+            <Link to={`/posts/${props.post.id}/`}>{props.post.title}</Link>
             </h5>
         </div>
         <ul className="list-group list-group-flush">
@@ -112,12 +112,12 @@ function Post(props) {
             Số lượng ứng tuyển: {Object.values(props.post.applicant).flat().length}
             </li>
             <li className="list-group-item">
-            Ngày cập nhật:&ensp;
-            <Moment format="DD/MM/YYYY">{props.post.update_date}</Moment>
+            Ngày đăng:&ensp;
+            <Moment format="DD/MM/YYYY">{props.post.created_date}</Moment>
             </li>
             <li className="list-group-item">
             <Button variant="outline-info" size="sm" style={{marginRight:"10px"}}>
-                <Link to={`/posts/${props.post.id}/`}>Xem bài đăng</Link>
+            <Link to={`/applicants/${props.post.id}/`} className="view-applicants-btn">Danh sách ứng viên</Link>
             </Button>
             <Button onClick={() => hideJob(props.post.id)}
             variant="outline-dark" size="sm"

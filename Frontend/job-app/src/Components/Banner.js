@@ -23,7 +23,7 @@ class Banner extends React.Component {
                 </div>
                 </div>
                 <div className="col-md-6">
-                <Image className="img-fluid" src={banner} alt="Hiring Image" style={{width: "100%", height: "auto"}}/>
+                <Image className="img-fluid" src={banner} alt="Hiring Image"/>
                 </div>
             </div>
             <SearchForm />

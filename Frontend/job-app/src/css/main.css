@@ -202,14 +202,21 @@
 
 
   /* * BANNER */
-.slider {
+  .slider {
   /* background-color: var(--light-blue-50); */
   background: #4AC29A;
   background: -webkit-linear-gradient(to right, #BDFFF3, #4AC29A);
   background: linear-gradient(to right, #ebfffb, #fffff7);
   padding-bottom: 1px;
   margin-top: 80px;
-}
+  }
+
+  .slider .img-fluid {
+    width: 100%;
+    height: auto;
+
+  }
+
 
 .banner {
   display: flex;
@@ -951,4 +958,15 @@ footer {
 .job-applicants {
   overflow: auto;
   width: 100%;
+}
+
+.view-applicants-btn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+
+.view-applicants-btn {
+  color: #17a2b8;
+  font-weight: 600;
 }

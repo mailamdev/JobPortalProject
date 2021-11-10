@@ -28,7 +28,7 @@ export default function CompanyList() {
             let res = await API.get(`${endpoints["companies"]}?page=${currentPage}`)
             setCompanies(res.data.results)
             let count  = res.data.count
-            setpageCount(Math.ceil(count / 6))
+            setpageCount(Math.ceil(count / 8))
             setLoading(false)
 
         }

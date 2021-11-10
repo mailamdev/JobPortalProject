@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Pagination, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
 import API, { endpoints } from '../Configs/API';
 import JobCart from './JobCart';
-import { useLocation } from "react-router";
 import Loading from './Loading';
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

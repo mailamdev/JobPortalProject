@@ -27,11 +27,11 @@ from django.shortcuts import redirect
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="JobApp API",
+        title="ITJobsApp API",
         default_version='v1',
-        description="APIs for JobApp",
+        description="APIs for ITJobsApp",
         contact=openapi.Contact(email="ltxmai221@gmail.com"),
-        license=openapi.License(name="JobApp@2021"),
+        license=openapi.License(name="Lâm T. Xuân Mai@2021"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),

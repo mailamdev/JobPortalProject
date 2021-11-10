@@ -74,7 +74,7 @@ class PostPanigation(PageNumberPagination):
       page_size = 10
 
 class CompanyPanigation(PageNumberPagination):
-      page_size = 6
+      page_size = 8
 
 
 class PostViewSet(viewsets.ViewSet,

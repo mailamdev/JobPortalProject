@@ -63,15 +63,15 @@ export default function SavedJobs() {
         {isLoading ?  (<Loading/>) : (
         <div className="container bootstrap snippets bootdey main">
         <div className="row">
-          <div className="profile-nav col-md-12 col-xs-12 col-lg-3">
+          <div className="profile-nav col-md-12 col-xs-12 col-lg-12 col-xl-3">
               <div className="panel">
                   <div className="user-heading round">
                     <div className="user-avatar">
-                            {avatar !== null ? (
-                                <img src={avatar} alt=""/>
-                            ): (
-                                <img src={userdefault} alt=""/>
-                            )}
+                    {avatar !== 'http://127.0.0.1:8000/static/' ? (
+                            <img src={avatar} alt=""/>
+                          ): (
+                            <img src={userdefault} alt=""/>
+                          )}
                             {/* <Button class="edit" onClick={updateAvatar}>  */}
                                 <FontAwesomeIcon icon={faPen} className="icon">
                                 <input
@@ -103,7 +103,7 @@ export default function SavedJobs() {
                   </ul>
               </div>
           </div>
-          <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+          <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="card h-100">
                 <div className="card-body">
                     {/* { jobs.map(job => (

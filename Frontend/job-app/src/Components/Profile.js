@@ -84,7 +84,7 @@ export default function Profile() {
         {user ? (
         <div className="container bootstrap snippets bootdey main">
         <div className="row">
-          <div className="profile-nav col-md-12 col-xs-12 col-lg-3">
+          <div className="profile-nav col-md-12 col-xs-12 col-lg-12 col-xl-3">
               <div className="panel">
                   <div className="user-heading round">
                       <div className="user-avatar">
@@ -111,7 +111,7 @@ export default function Profile() {
                   </ul>
               </div>
           </div>
-          <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+          <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="card h-100">
                 <div className="card-body">
                 <Form onSubmit={update}>

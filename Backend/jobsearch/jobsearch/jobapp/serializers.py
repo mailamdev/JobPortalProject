@@ -1,3 +1,4 @@
+
 from django.db.models import fields
 from django.db.models.fields import DateTimeField
 from rest_framework.serializers import ModelSerializer
@@ -9,12 +10,13 @@ class UserSerializer(ModelSerializer):
     
     def get_avatar(self, obj):
         request = self.context['request']
-        if obj.avatar.name.startswith('static/'):
-            path = "/%s" % obj.avatar.name
-        else:
-            path = '/static/%s' % (obj.avatar)
+        if type(obj.avatar.name) != type(None):
+            if obj.avatar.name.startswith('static/'):
+                path = "/%s" % obj.avatar.name
+            else:
+                path = '/static/%s' % (obj.avatar)
 
-        return request.build_absolute_uri(path)
+            return request.build_absolute_uri(path)
 
     class Meta:
         model = User
