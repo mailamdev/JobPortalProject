@@ -16,14 +16,11 @@ export default function Recruitment() {
     let [company, setCompany] = useState(null) 
     let [name, setName] = useState('')
     let [description, setDescription] = useState('')
-    const newImage = useRef()
+    let newImage = useRef()
     let [address, setAddress] = useState('')
     let [website, setWebsite] = useState('')
 
-    
-
     useEffect(() => {
-
         async function getCompany() {
             let res = await API.get(endpoints['recruiter-company'](userId), {
                 headers: {
@@ -35,7 +32,6 @@ export default function Recruitment() {
             setDescription(res.data.description)
             setAddress(res.data.address)
             setWebsite(res.data.website)
-
         }
         getCompany()
     }, [userId])
@@ -85,12 +81,12 @@ export default function Recruitment() {
                   <ul className="nav nav-pills nav-stacked">
                       <li className="active"><Link to="#"> 
                         <FontAwesomeIcon icon={faBriefcase} className="icon"></FontAwesomeIcon>
-                          Thông tin công ty</Link></li>
-                      <li><Link to="/recruitment-jobs"> 
-                      <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
+                        Thông tin công ty</Link></li>
+                        <li><Link to="/recruitment-jobs"> 
+                        <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
                         Danh sách tuyển dụng</Link></li>
                         <li><Link to="/add-post"> 
-                      <FontAwesomeIcon icon={faEdit} className="icon"></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faEdit} className="icon"></FontAwesomeIcon>
                         Đăng tuyển</Link></li>
                   </ul>
               </div>
@@ -154,16 +150,11 @@ export default function Recruitment() {
                     <Link to={`/company/${company.id}/posts/`}><Button variant="outline-success" className="button-item">Xem chi tiết công ty</Button></Link>
                     <Button onClick={update} variant="primary" className="button-item">Cập nhật thông tin</Button>   
                     </div>
-                    
-
                 </div>
             </div>
             </div>
         </div>
         </div>
-        
-        
-         
         ): (<Loading/>)}
         </>
     )

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import Loading from "./Loading"
 
-
 export default function Company() {
     let [posts, setPosts] = useState([])
     let [company, setCompany] = useState([])
@@ -27,7 +26,6 @@ export default function Company() {
             setLoading(false)
         }
         getCompany()
-        
     },[companyId])
 
     return (
@@ -69,6 +67,5 @@ export default function Company() {
         }
         </div>
         </>
-        
     )
 }

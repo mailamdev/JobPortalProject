@@ -4,19 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import API, { endpoints } from '../../Configs/API';
 import cookies from 'react-cookies'
+import { useHistory } from 'react-router';
 
- 
 export default function AddCompany() {
     let [userId, setUserId] = useState(null) 
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const image = useRef()
-    const [address, setAddress] = useState('')
-    const [website, setWebsite] = useState('')
+    let [name, setName] = useState('')
+    let [description, setDescription] = useState('')
+    let image = useRef()
+    let [address, setAddress] = useState('')
+    let [website, setWebsite] = useState('')
+    const history = useHistory();
 
     const handleChange = (e, editor) => {
         setDescription(editor.getData())
     }
+
     useEffect(() => {
         async function getUser() {
             let res = await API.get(endpoints['current-user'], {
@@ -28,8 +30,6 @@ export default function AddCompany() {
         }
         getUser()
     }, [])
-
-    
 
     const addCompany = async (event) => {
         if (name === "" ||  description === ""  || address === "" || image.current.files[0] === undefined ) {
@@ -52,13 +52,10 @@ export default function AddCompany() {
             })
             .then((res) => {
                 alert('Đăng ký thành công.')
-                this.props.history.push("/login");
-
-                
+                history.push('login')
             })
             .catch(err => console.error(err))
             }
-        
         event.preventDefault()
     }
 
@@ -118,7 +115,6 @@ export default function AddCompany() {
             <div className="row button-group">
                 <Button onClick={addCompany} variant="success" size="lg">Đăng ký</Button>   
             </div>
-
         </div>
         </Container>
         </>

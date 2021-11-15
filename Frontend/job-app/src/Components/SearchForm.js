@@ -4,8 +4,8 @@ import React, {useEffect, useState} from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import API, { endpoints } from '../Configs/API';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faSortDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function SearchForm() {
@@ -51,8 +51,9 @@ export default function SearchForm() {
             </div>
             <div className="input-field second-wrap">
                 <div className="input-select">
+                <FontAwesomeIcon icon={faAngleDown} className="icon-input-dropdown"></FontAwesomeIcon>
                 <select onChange={(event) => setLevel(event.target.value)}>
-                <option value="">Tất cả cấp bậc</option>)
+                <option value="">Tất cả cấp bậc</option>
                 {levels.map(level => {
                     let path = `&level_id=${level.id}`
                     return <option value={path} key={level.id}>{level.name}</option>})}
@@ -61,9 +62,10 @@ export default function SearchForm() {
             </div>
             <div className="input-field second-wrap">
                 <div className="input-select">
+                <FontAwesomeIcon icon={faAngleDown} className="icon-input-dropdown"></FontAwesomeIcon>
                 <select onChange={(event) => setLocation(event.target.value)}>
-                <option value="">Tất cả địa điểm</option>)
-                {/* <FontAwesomeIcon icon={faSortDown}  className="icon icon-dropdown"></FontAwesomeIcon> */}
+                <option value="">Tất cả địa điểm
+                </option>
 
                 {locations.map(l => {
                     let path = `&location_id=${l.id}`

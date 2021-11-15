@@ -127,6 +127,11 @@
         margin-right: 0;
         margin-bottom: 8px;
     }
+
+    .jobs-list__info-item .icon {
+        width: 16px;
+    }
+
     .jobs-list__info-row {
         margin-bottom: 0;
         display: block;
@@ -200,6 +205,8 @@
         margin-bottom: 0;
         padding: 2rem 1rem 1rem;
     }
+
+
 
     .job-detail {
         flex-wrap: wrap;

@@ -9,12 +9,6 @@ export default function SearchJobs() {
     let [posts, setPosts] = useState([])
     let [ isLoading, setLoading ] = useState(true)
     let location = useLocation()
-    // useEffect(async () => {
-    //     let res = await API.get(endpoints["posts"])
-    //     setPosts(res.data.results)
-    // })
-
-
 
     useEffect(() => {
         async function getData() {
@@ -22,10 +16,8 @@ export default function SearchJobs() {
             let res = await API.get(`${endpoints["posts"]}${query}`)
             setPosts(res.data.results)
             setLoading(false)
-
         }
         getData()
-        // setIsLoading(false)
     },[location])
     
 
@@ -34,9 +26,6 @@ export default function SearchJobs() {
         {isLoading ?  (<Loading/>) : (
         <Container>
         <div className="main">
-        {/* <Row>
-            {posts.map(post =><JobCart post={post}/>)}
-        </Row> */}
         {posts.length > 0 ? (<Row>
             {posts.map(post =><JobCart post={post}/>)}
         </Row>) : (

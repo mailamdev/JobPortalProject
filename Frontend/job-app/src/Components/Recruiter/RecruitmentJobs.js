@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment';
 
-
 export default function RecruitmentJob() {
     const user = cookies.load('user')
     let [company, setCompany] = useState(null) 
@@ -37,9 +36,6 @@ export default function RecruitmentJob() {
         }
     }, [user.id, company])
 
-
-    
-
     return(
         <>
         {posts === null ?  (<Loading/>) : (
@@ -49,17 +45,14 @@ export default function RecruitmentJob() {
                    <div className="panel">
                        <ul className="nav nav-pills nav-stacked">
                            <li><Link to="/recruitment"> 
-                             <FontAwesomeIcon icon={faBriefcase} className="icon"></FontAwesomeIcon>
-                               Thông tin công ty</Link></li>
-                           {/* <li><Link to="#"> 
-                           <FontAwesomeIcon icon={faFileAlt} className="icon"></FontAwesomeIcon>
-                             Quản lý CV</Link></li> */}
-                           <li  className="active"><Link to="/recruitment-jobs"> 
-                           <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
-                             Danh sách tuyển dụng</Link></li>
-                             <li><Link to="/add-post"> 
+                            <FontAwesomeIcon icon={faBriefcase} className="icon"></FontAwesomeIcon>
+                            Thông tin công ty</Link></li>
+                            <li  className="active"><Link to="/recruitment-jobs"> 
+                            <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
+                            Danh sách tuyển dụng</Link></li>
+                            <li><Link to="/add-post"> 
                             <FontAwesomeIcon icon={faEdit} className="icon"></FontAwesomeIcon>
-                                Đăng tuyển</Link></li>
+                            Đăng tuyển</Link></li>
                        </ul>
                    </div>
                </div>
@@ -68,17 +61,16 @@ export default function RecruitmentJob() {
                         <div className="card-body">
                             <div className="jobs-wrap">
                                 <Row>
-                                    
                                     {posts.map(post =>
                                         <Post post={post} key={post.id}/>
-                                        )}
+                                    )}
                                 </Row>
                             </div>
                         </div>
                     </div>
-                 </div>
-             </div>
-             </div>
+                </div>
+            </div>
+            </div>
         )}
         </>
     )
@@ -96,7 +88,6 @@ function Post(props) {
             alert("Đã ẩn bài đăng.")
         } catch (err) {
             console.error(err)
-            
         }
     }
     return (
@@ -120,16 +111,12 @@ function Post(props) {
             <Link to={`/applicants/${props.post.id}/`} className="view-applicants-btn">Danh sách ứng viên</Link>
             </Button>
             <Button onClick={() => hideJob(props.post.id)}
-            variant="outline-dark" size="sm"
-            >
-                Dừng tuyển
+            variant="outline-dark" size="sm">
+            Dừng tuyển
             </Button>   
             </li>
-            
         </ul>
         </div>
-            
-            
         </>
     )
 }

@@ -13,9 +13,7 @@ export default function Jobs() {
     let [posts, setPosts] = useState([])
     let [pageCount, setpageCount] = useState(0);
     let [currentPage, setCurrentPage] = useState(1);
-
     let [ isLoading, setLoading ] = useState(true)
-
 
     useEffect(() => {
         async function getData(currentPage) {
@@ -33,33 +31,19 @@ export default function Jobs() {
         let offsets = document.querySelector(".jobs-wrap").getBoundingClientRect();
         setCurrentPage(data.selected + 1);
         setPosts(posts);
-        // scroll to the top
         window.scrollTo((offsets.x + window.scrollX), (offsets.y + window.scrollY - 150))
     }
 
-    // let items = []
-    // for (let i = 0; i < Math.ceil(count/10); i++) {
-    //     items.push (
-    //         <Pagination.Item><Link to={"/?page=" + (i + 1)}>{i + 1}</Link></Pagination.Item>
-    //     )
-    // }
-
-
-        return (
-            <>
-            {isLoading ?  (<Loading/>) :
+    return (
+        <>
+        {isLoading ?  (<Loading/>) :
         (<Container>
         <h3 className="section-tittle text-center text-uppercase mt-3">Danh sách việc làm</h3>
-        {/* <Pagination>
-            {items}
-        </Pagination> */}
         <div className="jobs-container">
             <div className="jobs-wrap">
-            
                 <Row>
                     {posts.map(post =><JobCart post={post} key={post.id}/>)}
                 </Row>
-            
             </div>
             <ReactPaginate
                 previousLabel={<FontAwesomeIcon icon={faAngleLeft} className="icon"></FontAwesomeIcon>}
@@ -84,6 +68,6 @@ export default function Jobs() {
         </Container>
         )}
         </>
-        )
+    )
 }
 

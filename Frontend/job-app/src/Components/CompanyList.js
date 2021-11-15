@@ -12,16 +12,8 @@ import { faAngleRight, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 export default function CompanyList() {
     let [companies, setCompanies] = useState([])
     let [ isLoading, setLoading ] = useState(true)
-
-    // let [items, setItems] = useState([]);
     let [pageCount, setpageCount] = useState(0);
-    // let [count, setCount] = useState(0)
     let [currentPage, setCurrentPage] = useState(1);
-
-    // let total  = 10;
-  
-    // let [count, setCount] = useState(0)
-    // let location = useLocation()
 
     useEffect(() => {
         async function getData(currentPage) {
@@ -30,10 +22,8 @@ export default function CompanyList() {
             let count  = res.data.count
             setpageCount(Math.ceil(count / 8))
             setLoading(false)
-
         }
         getData(currentPage)
-        // location.search
     }, [currentPage])
 
     const handlePageClick = async (data) => {
@@ -41,9 +31,9 @@ export default function CompanyList() {
         setCompanies(companies);
     }
 
-        return (
-            <>
-            {isLoading ?  (<Loading/>) : (
+    return (
+        <>
+        {isLoading ?  (<Loading/>) : (
         <Container>
             <h3 className="section-tittle text-center text-uppercase mt-3">Danh sách công ty</h3>
             
@@ -75,6 +65,6 @@ export default function CompanyList() {
         </Container>
         )}
         </>
-        )
+    )
 }
 

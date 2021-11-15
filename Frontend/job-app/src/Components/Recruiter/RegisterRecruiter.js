@@ -6,21 +6,19 @@ import {
     Col,
     Form,
     Button,
-  } from 'react-bootstrap';
-
+} from 'react-bootstrap';
 import API, { endpoints } from '../../Configs/API';
 import { useHistory } from 'react-router';
 
-export default function RegisterRecruiter(props) {
-    const [email, setEmail] = useState('')
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    const [username, setUsername] = useState('')
-    const [phonenumber, setPhonenumber] = useState('')
-    const recruiter = 1
-    const [password, setPassword] = useState('')
-    const [comfirmpw, setComfirmpw] = useState('')
-    // const [isLogged, setLogged] = useState(false)
+export default function RegisterRecruiter() {
+    let [email, setEmail] = useState('')
+    let [firstname, setFirstname] = useState('')
+    let [lastname, setLastname] = useState('')
+    let [username, setUsername] = useState('')
+    let [phonenumber, setPhonenumber] = useState('')
+    let recruiter = 1
+    let [password, setPassword] = useState('')
+    let [comfirmpw, setComfirmpw] = useState('')
     const history = useHistory();
 
     const register = async (event) => {
@@ -38,10 +36,8 @@ export default function RegisterRecruiter(props) {
                 formData.append("is_recruiter", recruiter)
                 formData.append("password", password)
 
-                console.log(formData)
                 API.post(endpoints['users'], formData)
                 .then((res) => {
-                    // alert('Đăng ký thành công.')
                     login();
                 })
                 .catch(err => console.error(err))
@@ -53,7 +49,6 @@ export default function RegisterRecruiter(props) {
         event.preventDefault()
     }
 
-
     const login = async () => {
 
         try {
@@ -64,8 +59,7 @@ export default function RegisterRecruiter(props) {
                 'username': username,
                 'password': password,
                 'grant_type': 'password'
-              }) 
-
+            }) 
             cookies.save('access_token', res.data.access_token)
         } catch (err) {
             console.error(err)
@@ -78,7 +72,6 @@ export default function RegisterRecruiter(props) {
       })
       cookies.save('user', user.data)
       history.push('add-company')
-    //   this.props.history.push("/add-company");
   }
 
     return(
@@ -146,7 +139,6 @@ export default function RegisterRecruiter(props) {
                         change={event => setComfirmpw(event.target.value)}
                         />
                         <Button type="submit" className="btn btn-primary btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Tiếp tục</Button>
-                        {/* </Col> */}
                     </Form>
                 </Col>
             </Row>
@@ -155,8 +147,6 @@ export default function RegisterRecruiter(props) {
         </>
     )
 }
-
-  
 
 export class RegisterForm extends React.Component {
     render() {

@@ -1,9 +1,7 @@
 import React from 'react'
-
 import "../css/base.css"
 import "../css/main.css"
 import { Container, Image } from 'react-bootstrap'
-// import SearchForm from './SearchForm'
 import banner from '../img/banner.png'
 import SearchForm from './SearchForm'
 
@@ -29,9 +27,6 @@ class Banner extends React.Component {
             <SearchForm />
             </Container>
             </div>
-            
-
-            
             </>
         )
     }

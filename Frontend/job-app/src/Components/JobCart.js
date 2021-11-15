@@ -10,12 +10,10 @@ import { faClock, faDollarSign, faMapMarkerAlt, faBriefcase } from '@fortawesome
 export default function JobCart(props) {
         return (
             <> 
-            
             <Col xs={12} md={6} lg={6}>
                 <div className="jobs-item" style={{position: 'relative'}}>
                     <h5 className="jobs__tittle">
                         <Link to={`/posts/${props.post.id}/`}>{props.post.title}</Link>
-
                     </h5>
                     <div className="jobs__info jobs-list__info">
                         <div className="jobs-list__info-row">
@@ -44,7 +42,6 @@ export default function JobCart(props) {
                             <div className="company-img">
                             <img src={props.post.company.image} alt={props.post.company.name}/>
                             </div>
-                            
                             <Link to={`/company/${props.post.company.id}/posts/`} className="company-name">{props.post.company.name}</Link>
                         </div>
                     </div>

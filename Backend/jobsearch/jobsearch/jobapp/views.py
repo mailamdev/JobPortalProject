@@ -13,14 +13,9 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 
-from .models import Applied_Job, JobType, Level, Post, Company, SavedJobs, User, SkillTag
-from .serializers import ( AppliedJobSerializer, CompanyDetailSerializer, JobTypeSerializer, LevelSerializer, LocationSerializer, PostSerializer, 
-                        PostDetailSerializer,
-                        CompanySerializer, 
-                        SkillTagSerializer, 
-                        UserSerializer, 
-                        Location,
-                        SavedPostSerializer)
+from .models import Applied_Job, JobType, Level, Post, Company, SavedJobs, User, SkillTag, Location
+from .serializers import ( AppliedJobSerializer, CompanyDetailSerializer, JobTypeSerializer, 
+                            LevelSerializer, LocationSerializer, PostSerializer, PostDetailSerializer, CompanySerializer, SkillTagSerializer, UserSerializer, SavedPostSerializer)
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 
@@ -38,10 +33,7 @@ class UserViewSet(viewsets.ViewSet,
     def get_permissions(self):
         if self.action == 'current_user':
             return [permissions.IsAuthenticated()]
-            
         return [permissions.AllowAny()]
-
-
 
     @action(methods=['get'], detail=False, url_path='current-user')
     def current_user(self, request):
@@ -64,7 +56,6 @@ class UserViewSet(viewsets.ViewSet,
         return Response(UserSerializer(user, context={'request': self.request}).data, status=status.HTTP_200_OK)   
 
 
-        
 class AuthInfo(APIView):
     def get(self, request):
         return Response(settings.OAUTH2_INFO, status=status.HTTP_200_OK)    
@@ -75,7 +66,6 @@ class PostPanigation(PageNumberPagination):
 
 class CompanyPanigation(PageNumberPagination):
       page_size = 8
-
 
 class PostViewSet(viewsets.ViewSet,
                     generics.ListAPIView, 
@@ -97,9 +87,8 @@ class PostViewSet(viewsets.ViewSet,
 
         return super().get_parsers()
     
-    # ẨN BÀI VIẾT
+    # * ẨN BÀI VIẾT
     @action(methods=['POST'], detail=True, url_path="hide-post", url_name="hide-post")
-    # /posts/{pk}/hide-post
     def hide_post(self, request, pk):
         try: 
             p = Post.objects.get(pk=pk)
@@ -110,12 +99,9 @@ class PostViewSet(viewsets.ViewSet,
 
         return Response(data=PostSerializer(p, context={'request': request}).data, status=status.HTTP_200_OK)
 
-    # Có pk thì detail = true
-
-
+    # * Tìm kiếm
     def get_queryset(self):
         posts = Post.objects.filter(active=True)
-        # * Tìm kiếm việc làm
         q = self.request.query_params.get('q')
         location_id = self.request.query_params.get('location_id')
         level_id = self.request.query_params.get('level_id')
@@ -136,8 +122,6 @@ class PostViewSet(viewsets.ViewSet,
                                     Q(skill_tags__name=q) |
                                     Q(company__name__icontains=q)).distinct()
                 
-                    
-
         # * Lọc việc làm theo kỹ năng
         skill_id = self.request.query_params.get('skill_id')
         if skill_id is not None:
@@ -155,6 +139,7 @@ class PostViewSet(viewsets.ViewSet,
 
         return posts
 
+    # * Lấy danh sách ứng viên
     @action(methods=['get'], detail=True, url_path='applicants')
     def get_applicants(self, request, pk):
         applicants = self.get_object().applicant.all()
@@ -168,7 +153,7 @@ class PostViewSet(viewsets.ViewSet,
         job = SavedJobs.objects.create(user=user, post=post)
 
         return Response(SavedPostSerializer(job, context={'request': request}).data, status=status.HTTP_200_OK)
-        # 
+        
     # * Ứng tuyển
     @action(methods=['post'], detail=True, url_path='apply-job')
     def apply_job(self, request, pk):
@@ -183,11 +168,11 @@ class PostViewSet(viewsets.ViewSet,
 class AddPostViewSet(viewsets.ViewSet, generics.CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
+
     def get_serializer_context(self):
         context = {'request': self.request}
         return context  
 
-   
     def create(self, request,  *args, **kwargs):
         creater = request.user
         title = request.data['title']
@@ -197,10 +182,8 @@ class AddPostViewSet(viewsets.ViewSet, generics.CreateAPIView):
         salary = request.data['salary']
         location = Location.objects.get(id=request.data['location'])
         company = Company.objects.get(id=request.data['company'])
-
         post = Post.objects.create(creater=creater, title=title, content=content, job_type=job_type, level=level, salary=salary, location=location, company=company, )
         post.save()
-
         skill_list = list(request.data['skilltag'].split(','))
 
         for index in range(len(skill_list)):
@@ -214,7 +197,6 @@ class AddCompanyViewSet(viewsets.ViewSet, generics.CreateAPIView):
     def get_serializer_context(self):
         context = {'request': self.request}
         return context  
-
    
     def create(self, request,  *args, **kwargs):
         user = request.user
@@ -228,7 +210,11 @@ class AddCompanyViewSet(viewsets.ViewSet, generics.CreateAPIView):
         return Response(CompanySerializer(company, context={'request': self.request}).data, status=status.HTTP_200_OK)    
 
 
-class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAPIView, generics.CreateAPIView, generics.UpdateAPIView):
+class CompanyViewSet(viewsets.ViewSet, 
+                    generics.RetrieveAPIView, 
+                    generics.ListAPIView, 
+                    generics.CreateAPIView, 
+                    generics.UpdateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanyDetailSerializer
     parser_class = [MultiPartParser, ]
@@ -268,7 +254,6 @@ class CompanyViewSet(viewsets.ViewSet, generics.RetrieveAPIView, generics.ListAP
 
 class SavedPostViewSet(viewsets.ViewSet, 
                         generics.ListAPIView, 
-                        # generics.CreateAPIView, 
                         generics.DestroyAPIView,
                         generics.RetrieveAPIView
                         ):

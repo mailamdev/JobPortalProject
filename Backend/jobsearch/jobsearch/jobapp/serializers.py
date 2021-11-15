@@ -31,23 +31,12 @@ class UserSerializer(ModelSerializer):
         user.save()
         
         return user
-    
-    # def update(self, instance, validated_data):
-    #     instance.first_name = validated_data['first_name']
-    #     instance.last_name = validated_data['last_name']
-    #     instance.email = validated_data['email']
-    #     instance.phone_number = validated_data['phone_number']
-
-    #     instance.save() 
-
-    #     return super().update(instance, validated_data)
 
 
 class SkillTagSerializer(ModelSerializer):
     class Meta:
         model = SkillTag
         fields = ["id", "name"]
-
 
 class LevelSerializer(ModelSerializer):
      class Meta:
@@ -67,7 +56,6 @@ class LocationSerializer(ModelSerializer):
 
 class CompanySerializer(ModelSerializer):
     image = serializers.SerializerMethodField()
-    
     def get_image(self, obj):
         request = self.context['request']
         if obj.image.name.startswith('static/'):
@@ -80,18 +68,6 @@ class CompanySerializer(ModelSerializer):
         model = Company
         fields = ["id", "name", "description", "image", "address", "website", "user"]
     
-    # def update(self, instance, validated_data):
-    #     instance.name = validated_data['name']
-    #     instance.description = validated_data['description']  
-    #     instance.address = validated_data['address']
-    #     instance.website = validated_data['website']
-    #     if 'image' in validated_data:
-    #         instance.image = validated_data.pop('image')    
-
-    #     instance.save() 
-
-    #     return super().update(instance, validated_data) 
-
 
 class CompanyDetailSerializer(CompanySerializer):
     class Meta:
@@ -104,19 +80,15 @@ class PostSerializer(ModelSerializer):
     level = LevelSerializer()
     location = LocationSerializer()
     company = CompanySerializer()
-
-    # skill_tags_id = serializers.PrimaryKeyRelatedField(queryset=SkillTag.objects.all(), many=True)
     
     class Meta:
         model = Post
         fields = ["id", "title", "created_date", "update_date", "job_type", "level", "salary", "location", "company", "skill_tags", "applicant"]
 
 class PostDetailSerializer(PostSerializer):
-    
     class Meta:
         model = PostSerializer.Meta.model
         fields = PostSerializer.Meta.fields + ['content']    
-
 
 
 class SavedPostSerializer(ModelSerializer):
@@ -126,6 +98,7 @@ class SavedPostSerializer(ModelSerializer):
     class Meta:
         model = SavedJobs
         fields = ["id", "date_saved", "user", "post"]
+
 
 class AppliedJobSerializer(ModelSerializer):
     cv = serializers.SerializerMethodField()

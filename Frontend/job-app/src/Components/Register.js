@@ -5,11 +5,9 @@ import {
     Col,
     Form,
     Button,
-  } from 'react-bootstrap';
-
+} from 'react-bootstrap';
 import API, { endpoints } from '../Configs/API';
 import { Redirect } from 'react-router';
-
   
 class Register extends React.Component {
     constructor() {
@@ -22,8 +20,6 @@ class Register extends React.Component {
             'phone_number': '',
             'password': '',
             'comfirmpw': '',
-            
-            // 'role': '',
         }
         this.state = {
             'user': this.user
@@ -69,7 +65,6 @@ class Register extends React.Component {
             <Row className="justify-content-md-center" lg={2}>
                 <Col md="6">
                     <h1 className="section-tittle text-uppercase text-center">Đăng ký người dùng</h1>
-                    
                     <Form onSubmit={this.register}>
                         <RegisterForm 
                         id="email" 
@@ -125,44 +120,16 @@ class Register extends React.Component {
                         field={this.state.user.comfirmpw} 
                         change={this.change.bind(this, 'comfirmpw')}
                         />
-
-                        {/* <Form.Group as={Row} > */}
-                        {/* <div className="form-group"> 
-                        <span style={{fontSize:"18px"}}>Bạn là:</span>
-                        <Form.Control
-                            as="select"
-                            className="my-1 mr-sm-2"
-                            value={this.state.user.role}
-                            onChange={this.change.bind(this, 'role')}
-                            style={{ fontSize: 18, height: "52px"}}
-
-                        >  
-                            <option value="">---</option>
-                            <option value="Ứng viên">Ứng viên tìm việc</option>
-                            <option value="Nhà tuyển dụng">Nhà tuyển dụng</option>
-
-                        </Form.Control>
-                        </div> */}
-                        
-                        {/* </Form.Group> */}
-
-                        
-                        
-                        {/* <Col style={{ paddingLeft: 0, paddingRight: 0 }} className="d-flex justify-content-between" > */}
-                        {/* <span>Đã có tài khoản? <a href="/login">Đăng nhập</a></span> */}
                         <span>Bạn là nhà tuyển dụng? <a href="/register-recruiter">Đăng ký tuyển dụng</a></span>
                         <Button type="submit" className="btn btn-info btn-block text-uppercase" style={{ fontSize: 18, height: "48px", marginTop: "32px"}}>Đăng ký</Button>
-                        {/* </Col> */}
                     </Form>
                 </Col>
             </Row>
-                    
-                    
-                <Row lg={2} className='d-flex justify-content-center'>
-                    <Col>
-                    
-                    </Col>
-                </Row>
+            <Row lg={2} className='d-flex justify-content-center'>
+                <Col>
+                
+                </Col>
+            </Row>
             </div>
             </Container>
             </>
@@ -174,7 +141,6 @@ export class RegisterForm extends React.Component {
     render() {
         return (
             <div className="form-group">
-            {/* <label>First name</label> */}
             <input type={this.props.type} 
             className="form-control" 
             value={this.props.field}

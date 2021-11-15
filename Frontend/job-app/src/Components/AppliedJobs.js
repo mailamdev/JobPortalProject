@@ -36,7 +36,6 @@ export default function SavedJobs() {
             })
             setJobs(res.data)
             setLoading(false)
-
         }
         getData()
     }, [])
@@ -56,16 +55,12 @@ export default function SavedJobs() {
                           ): (
                             <img src={userdefault} alt=""/>
                           )}
-                            {/* <Button class="edit" onClick={updateAvatar}>  */}
                                 <FontAwesomeIcon icon={faPen} className="icon">
                                 <input
                                     type="file"
                                     accept=".png, .jpg, .jpeg"
-                                    // ref={newAvatar}
-                                    // style={{ zIndex:"5" }}
                                     />
                                 </FontAwesomeIcon>
-                            {/* </Button> */}
                         </div>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
@@ -74,64 +69,49 @@ export default function SavedJobs() {
                   <ul className="nav nav-pills nav-stacked">
                       <li ><Link to="/profile"> 
                         <FontAwesomeIcon icon={faUser} className="icon"></FontAwesomeIcon>
-                          Thông tin cá nhân</Link></li>
-                      {/* <li><Link to="#"> 
-                      <FontAwesomeIcon icon={faFileAlt} className="icon"></FontAwesomeIcon>
-                        Quản lý CV</Link></li> */}
-                      <li><Link to="/saved-jobs"> 
-                      <FontAwesomeIcon icon={faBookmark} className="icon"></FontAwesomeIcon>
+                        Thông tin cá nhân</Link></li>
+                        <li><Link to="/saved-jobs"> 
+                        <FontAwesomeIcon icon={faBookmark} className="icon"></FontAwesomeIcon>
                         Việc làm đã lưu</Link></li>
-                      <li  className="active"><Link to="#"> 
-                      <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
-                      Việc làm đã ứng tuyển</Link></li>
+                        <li  className="active"><Link to="#"> 
+                        <FontAwesomeIcon icon={faClipboard} className="icon"></FontAwesomeIcon>
+                        Việc làm đã ứng tuyển</Link></li>
                   </ul>
               </div>
           </div>
           <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="card h-100">
                 <div className="card-body">
-                    {/* { jobs.map(job => (
-                     <div>{job.post.title}</div>
-
-                    )) */}
-
                     <div className="jobs-wrap">
-                <Row style={{flexWrap: 'wrap'}}>
-                    {jobs.map(job =>
-                    <Col xs={12} md={6} lg={6}>
-                    <div className="jobs-item" style={{position: 'relative'}}>
-                        <h5 className="jobs__tittle">
-                            <Link to={`/posts/${job.post.id}/`}>{job.post.title}</Link>
-    
-                        </h5>
-                        
-                        <div className="jobs__company">
-                            <div className="left">
-                                <div className="company-img">
-                                <img src={job.post.company.image} alt={job.post.company.name}/>
+                        <Row style={{flexWrap: 'wrap'}}>
+                            {jobs.map(job =>
+                            <Col xs={12} md={6} lg={6}>
+                            <div className="jobs-item" style={{position: 'relative'}}>
+                                <h5 className="jobs__tittle">
+                                    <Link to={`/posts/${job.post.id}/`}>{job.post.title}</Link>
+                                </h5>
+                                <div className="jobs__company">
+                                    <div className="left">
+                                        <div className="company-img">
+                                        <img src={job.post.company.image} alt={job.post.company.name}/>
+                                        </div>
+                                        
+                                        <Link to={`/company/${job.post.company.id}/posts/`} className="company-name">{job.post.company.name}</Link>
+                                    </div>
                                 </div>
-                                
-                                <Link to={`/company/${job.post.company.id}/posts/`} className="company-name">{job.post.company.name}</Link>
+                                <div className="applied-time">Ngày ứng tuyển:&ensp;
+                                <Moment format="DD/MM/YYYY">{job.date_applied}</Moment></div>
+                                <div><a href={job.cv}>Xem CV</a></div>
                             </div>
-                        </div>
-                        
-                        <div className="applied-time">Ngày ứng tuyển:&ensp;
-                        <Moment format="DD/MM/YYYY">{job.date_applied}</Moment></div>
-                        <div><a href={job.cv}>Xem CV</a></div>
-                    </div>
-                </Col>
+                        </Col>
                         )}
-                </Row>
-            </div>
-                    
+                        </Row>
+                    </div>
+                    </div>
                 </div>
             </div>
-            </div>
         </div>
         </div>
-        
-        
-         
         )}
         </>
     )

@@ -10,15 +10,11 @@ import cookies from 'react-cookies'
 import ApplyJob from "./ApplyJob";
 import Moment from 'react-moment';
 
-
-
 export default function JobDetails() {
     let [post, setPost] = useState()
     let { postId } = useParams()
     let [user, setUser] = useState(null) 
     let [showForm, setShowForm] = useState(false)
-    
-   
 
     useEffect(() => {
         async function getUser() {
@@ -51,7 +47,6 @@ export default function JobDetails() {
             } catch (err) {
                 console.error(err)
             }
-            
         }
         else {
             alert("Vui lòng đăng nhập")
@@ -66,9 +61,6 @@ export default function JobDetails() {
         }
     }
 
-
-    console.log(showForm)
-    
     return (
         <>
         {post ? (
@@ -81,7 +73,6 @@ export default function JobDetails() {
                     Bạn đang ứng tuyển vị trí {post.title} tại công ty {post.company.name}
                 </h4>
                 <ApplyJob/>
-                
                 </>
             ) : (
             <div>
@@ -90,15 +81,11 @@ export default function JobDetails() {
                     <div className="job-detail__logo-company">
                         <img src={post.company.image} alt={post.company.name}/>
                     </div>
-                    
                     <div className="job-detail__info">
                         <h4 className="job__tittle">{post.title}
                         </h4>
-                        <Link to={`/company/${post.company.id}/posts/`} className="company-name">{post.company.name}</Link>
-
-
-
-
+                        <Link to={`/company/${post.company.id}/posts/`} className="company-name">{post.company.name}
+                        </Link>
                         <div className="job-detail__info-list">
                             <div className="job-detail__info-item">
                                 <FontAwesomeIcon icon={faDollarSign} className="icon"></FontAwesomeIcon>
@@ -117,9 +104,7 @@ export default function JobDetails() {
                                 <span className="info-text">{post.level.name}</span>
                             </div>
                         </div>
-                        
-                    </div>
-                    
+                    </div>                
                     <div className="job-detail__btn">
                     <div className="job-detail__info-item-time">
                         <FontAwesomeIcon icon={faCalendarDay} className="icon"></FontAwesomeIcon>
@@ -137,8 +122,8 @@ export default function JobDetails() {
                     </ul>
                 </div>
                 <div className="job-detail__content">
-                        <div dangerouslySetInnerHTML={ { __html: post.content}} >
-                        </div>
+                    <div dangerouslySetInnerHTML={ { __html: post.content}} >
+                    </div>
                 </div>
                 </div>
             </div>

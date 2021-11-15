@@ -288,6 +288,10 @@
   height: 68px;
 }
 
+.search-form form .inner-form .input-field .input-select{
+  position: relative;
+}
+
 .search-form form .inner-form .input-field input {
   height: 68px;
   background: #fff;
@@ -295,6 +299,7 @@
   display: block;
   width: 100%;
   padding: 10px 32px;
+
 }
 
 .search-form form .inner-form .input-field input.placeholder {
@@ -374,7 +379,6 @@
     width: 100%;
     height: 68px;
     border: 2px solid rgba(223, 223, 223);
-    /* border-left: none; */
     padding-left: 12px;
     color: #454545;
     -moz-appearance:none; /* Firefox */
@@ -422,6 +426,12 @@
     }
   }
 
+.icon-input-dropdown {
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  color: #979797;
+}
 
 
 /* END SEARCH FORM */
@@ -511,9 +521,7 @@
 }
 
 .jobs__info {
-    /* display: flex; */
     align-items: center;
-    /* margin-bottom: 24px; */
 }
 
 .jobs-list__info-item {
@@ -525,10 +533,7 @@
   color: var(--orange-color);
 }
 
-.jobs-list__info {
-    /* justify-content: space-between; */
 
-}
 
 .jobs-list__info-row {
   margin-bottom: 6px;
@@ -879,7 +884,7 @@ footer {
 }
 
 .job-detail__info-item {
-  margin-right: 40px;
+  margin-right: 32px;
 }
 
 .job-detail__info .company-name {

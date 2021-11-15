@@ -30,31 +30,25 @@ class Company(models.Model):
 
 class Level(models.Model):
     name = models.CharField(max_length=100, unique=True)
-
     def __str__(self):
         return self.name
 
 
 class JobType(models.Model):
     name = models.CharField(max_length=100, unique=True)
-
     def __str__(self):
         return self.name
 
 class Location(models.Model):
     name = models.CharField(max_length=100, unique=True)
-
     def __str__(self):
         return self.name
-
-
 
 class SkillTag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name 
-
 
 class Post(models.Model):
     class Meta: 
@@ -75,8 +69,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-
 
 
 class Applied_Job(models.Model):

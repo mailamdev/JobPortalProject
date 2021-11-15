@@ -13,20 +13,21 @@ import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated()
 
 export default function AddCompany() {
-    const [title, setTitle] = useState('') 
-    const [content, setContent] = useState('')
-    const [jobtype, setJobtype] = useState('')
-    const [level, setLevel] = useState('')
-    const [salary, setSalary] = useState('')
-    const [location, setLocation] = useState('')
-    const [company, setCompany] = useState('')
-    const user = cookies.load('user')
+    let [title, setTitle] = useState('') 
+    let [content, setContent] = useState('')
+    let [jobtype, setJobtype] = useState('')
+    let [level, setLevel] = useState('')
+    let [salary, setSalary] = useState('')
+    let [location, setLocation] = useState('')
+    let [company, setCompany] = useState('')
+    let user = cookies.load('user')
 
     // Load thông tin từ API
-    const [locations, setLocations] = useState([])
-    const [skills, setSkills] = useState([])
-    const [levels, setLevels] = useState([])
-    const [types, setTypes] = useState([])
+    let [locations, setLocations] = useState([])
+    let [skills, setSkills] = useState([])
+    let [levels, setLevels] = useState([])
+    let [types, setTypes] = useState([])
+
     useEffect(() => {
         async function getSkill() {
             let res = await API.get(endpoints["skillstag"])
@@ -68,16 +69,11 @@ export default function AddCompany() {
         return option.value
     })
     
-
     const handleChange = (e, editor) => {
         setContent(editor.getData())
     }
 
-
-    
-
     const addPost = async (event) => {
-        // event.preventDefault()
         console.log(location)
 
         if (title === "" ||  content === ""  || jobtype === "" || level === "" || salary === "" || location === "" ){
@@ -101,7 +97,6 @@ export default function AddCompany() {
             }).then((res) => alert('Đăng tuyển thành công.'))
             .catch(err => console.error(err))}
         event.preventDefault()
-
     }
 
     return (
@@ -176,9 +171,6 @@ export default function AddCompany() {
                             return <option value={location.id} key={location.id}>{location.name}</option>})}
                             </select> 
                         </div>
-                        <div class="form-group row form-row">
-                            
-                        </div>
                         <div className="form-group row form-row field-name">
                         <label htmlFor="name" className="col-sm-2 col-form-label">
                                 <span>Mức lương:</span>
@@ -191,17 +183,12 @@ export default function AddCompany() {
                         </div>
                         <div class="form-group row form-row">
                             <label for="exampleFormControlSelect2" className="col-sm-2 col-form-label">Kỹ năng yêu cầu: </label>
-                            {/* <select multiple class="form-control" id="exampleFormControlSelect2">
-                            {skills.map(skill => {
-                            return <option value={skill.id} key={skill.id}>{skill.name}</option>})}
-                            </select> */}
                             <Select 
                             className="col-sm-10"
                             closeMenuOnSelect={false}
                             components={animatedComponents}
                             isMulti
                             options={skillOption}
-                            
                             onChange={(selectedOption) =>  setOptions(selectedOption)}
                             ></Select>
                         </div>

@@ -9,12 +9,9 @@ import { faUser, faBookmark, faClipboard} from '@fortawesome/free-solid-svg-icon
 import { Button, Form } from 'react-bootstrap';
 import Loading from './Loading';
 
-
 export default function Profile() {
     let [user, setUser] = useState(null) 
     let [userId, setUserId] = useState(null) 
-
-    
     let [last_name, setLastName] = useState('') 
     let [first_name, setFirstName] = useState('') 
     let [phone_number, setPhone] = useState('') 
@@ -22,7 +19,6 @@ export default function Profile() {
     let [avatar, setAvatar] = useState('') 
 
     const newAvatar = useRef()
-
 
     useEffect(() => {
         async function getUser() {
@@ -40,7 +36,6 @@ export default function Profile() {
             setPhone(res.data.phone_number)
             setEmail(res.data.email)
             setAvatar(res.data.avatar)
-
         }
         getUser()
             
@@ -115,7 +110,6 @@ export default function Profile() {
             <div className="card h-100">
                 <div className="card-body">
                 <Form onSubmit={update}>
-
                     <div className="row gutters">
                         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div className="form-group">
@@ -183,9 +177,6 @@ export default function Profile() {
             </div>
         </div>
         </div>
-        
-        
-         
         ): (<Loading/>)}
         </>
     )

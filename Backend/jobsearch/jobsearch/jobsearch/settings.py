@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -44,7 +42,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
-    # 'rest_framework.authtoken',
     'oauth2_provider',
     'drf_yasg',
     'debug_toolbar',
@@ -54,14 +51,11 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': '20',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' 
-    # 'DEFAULT_PARSER_CLASSES': [
-    #     'rest_framework.parsers.JSONParser',
-    # ],
+
 }
 OAUTH2_PROVIDER = {
     'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'
@@ -89,11 +83,7 @@ INTERNAL_IPS = [
 ]
 
 # CORS_ORIGIN_ALLOW_ALL = True
-
-# CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [ "http://localhost:3000", ]
-
-
 
 ROOT_URLCONF = 'jobsearch.urls'
 
@@ -128,8 +118,6 @@ DATABASES = {
         'HOST': ''
     }
 }
-
-
 
 AUTH_USER_MODEL = 'jobapp.User'
 
