@@ -57,7 +57,7 @@ export default function ApplyJob() {
 
     return (
         <>
-            <span className="mt-3">Tải lên CV (yêu cầu định dạng pdf):  </span>
+            <span className="mt-3">Tải lên CV (*.pdf):  </span>
             <input type="file" accept=".pdf" ref={cv} />  
             <Form.Group controlId="summaryContent">
                 <Form.Label className="mt-2">Giới thiệu bản thân:</Form.Label>

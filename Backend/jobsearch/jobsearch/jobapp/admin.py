@@ -82,16 +82,22 @@ class JobAppAdminSite(admin.AdminSite):
     site_header = "ITJOBS MANAGEMENT"
     def get_urls(self):
         return [
-            path('app-stats/', self.app_stats)
+            path('stats/', self.app_stats)
         ] + super().get_urls()
 
     def app_stats(self, request):
-        company_count = Company.objects.count()
-        stats = Company.objects.annotate(post_count=Count('post')).values("id", "name", "post_count")
+        applied_count = Applied_Job.objects.count()
+        companies_count = Company.objects.count()
+        post_count = Post.objects.count()
+
+        post_stats = SkillTag.objects.annotate(post_count=Count('post')).values("name", "post_count")
+
 
         return TemplateResponse(request, 'admin/app-stats.html', {
-            'company_count': company_count,
-            'stats': stats
+            'applied_count': applied_count,
+            'companies_count': companies_count,
+            'post_count': post_count,
+            'post_stats': post_stats,
         })
 
 admin.site = JobAppAdminSite(name='myadmin')

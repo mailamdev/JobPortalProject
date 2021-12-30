@@ -11,7 +11,7 @@ import userdefault from "../img/user.png";
 export default function SavedJobs() {
     let [jobs, setJobs] = useState([])
     let [user, setUser] = useState(null) 
-    let [ isLoading, setLoading ] = useState(true)
+    let [isLoading, setLoading] = useState(true)
     let [avatar, setAvatar] = useState('') 
 
     useEffect(() => {

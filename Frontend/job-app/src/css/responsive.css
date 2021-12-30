@@ -4,7 +4,10 @@
         margin-left: 32px;
         margin-right: 16px;
     }
-
+    .banner {
+        margin-top: 112px;
+        margin-bottom: 112px;
+    }
 
 }
 
@@ -15,6 +18,10 @@
     }
     .page-link {
         padding: 0.75rem 1.25rem;
+    }
+    .banner {
+        margin-top: 112px;
+        margin-bottom: 112px;
     }
 }
 
@@ -199,11 +206,11 @@
     .slider .img-fluid {
         display: flex;
         margin: 0 auto;
-        width: 80%;
+        width: 70%;
     }
     .jumbotron {
         margin-bottom: 0;
-        padding: 2rem 1rem 1rem;
+        padding: 1rem;
     }
 
 

@@ -4,7 +4,7 @@ import API, { endpoints } from "../Configs/API"
 import cookies from 'react-cookies'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBookmark, faClipboard,faPen} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBookmark, faClipboard} from '@fortawesome/free-solid-svg-icons';
 import Loading from "./Loading"
 import Moment from 'react-moment';
 import userdefault from "../img/user.png";
@@ -49,18 +49,12 @@ export default function SavedJobs() {
           <div className="profile-nav col-md-12 col-xs-12 col-lg-12 col-xl-3">
               <div className="panel">
                   <div className="user-heading round">
-                  <div className="user-avatar">
-                  {avatar !== 'http://127.0.0.1:8000/static/' ? (
+                        <div className="user-avatar">
+                        {avatar !== 'http://127.0.0.1:8000/static/' ? (
                             <img src={avatar} alt=""/>
                           ): (
                             <img src={userdefault} alt=""/>
                           )}
-                                <FontAwesomeIcon icon={faPen} className="icon">
-                                <input
-                                    type="file"
-                                    accept=".png, .jpg, .jpeg"
-                                    />
-                                </FontAwesomeIcon>
                         </div>
                       <h3>{user.last_name} {user.first_name}</h3>
                       <p>@{user.username}</p>
