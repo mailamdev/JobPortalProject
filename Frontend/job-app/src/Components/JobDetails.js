@@ -32,7 +32,6 @@ export default function JobDetails() {
         }
         getPost()
     },[postId])
-    console.log(user)
 
     const saveJob = async () => {
         if(user !== null && user !== undefined) {

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'drf_yasg',
     'debug_toolbar',
-    
+    'django-heroku',
 
 ]
 
@@ -80,6 +80,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 INTERNAL_IPS = [
 '127.0.0.1'
